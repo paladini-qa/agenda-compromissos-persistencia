@@ -6,9 +6,9 @@ public class Compromisso
 {
     public DateTime Data{get; set;}
     public TimeSpan Hora{get; set;}
-    public required string Descricao{get; set;}
-    public required Usuario Usuario; // ASSOCIAÇÃO SIMPLES
-    public required Local Local;
+    public string Descricao{get; set;}
+    public Usuario Usuario; // ASSOCIAÇÃO SIMPLES
+    public string Local;
     public List<Participante> Participantes = []; // ASSOCIAÇÃO N:N
     public List<Anotacao> Anotacoes = []; // COMPOSIÇÃO
     public List<string> ErrosDeValidacao = [];
@@ -18,7 +18,7 @@ public class Compromisso
         TimeSpan hora,
         string descricao,
         Usuario usuario,
-        Local local)
+        string local)
     {
         if (!ValidarCompromisso(data, hora, descricao))
         {
