@@ -37,15 +37,7 @@ public class Compromisso
 
         DateTime dataAtual = DateTime.Today.AddDays(1);
         
-        
-        if (!DateTime.TryParseExact(data.ToString("dd/MM/yyyy"), 
-                    "dd/MM/yyyy", 
-                    System.Globalization.CultureInfo.GetCultureInfo("pt-BR"),
-                    System.Globalization.DateTimeStyles.None, 
-                    out DateTime _data)) 
-        {
-            throw new Exception($"A {data} é inválida.");
-        } else if ( data < dataAtual ) 
+        if ( data < dataAtual ) 
         {
             ErrosDeValidacao.Add($"A data {data.ToString("dd/MM/yyyy")} precisa ser no mínimo {dataAtual.ToString("dd/MM/yyyy")}");
         }
