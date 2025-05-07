@@ -13,3 +13,4 @@ C:\Users\joaop\GitHub\Sistema-de-Agenda-de-Compromissos-com-Associacao-entre-Obj
 C:\Users\joaop\GitHub\Sistema-de-Agenda-de-Compromissos-com-Associacao-entre-Objetos\AgendaCompromissos.Console\obj\Debug\net9.0\AgendaCompromissos.Console.pdb
 C:\Users\joaop\GitHub\Sistema-de-Agenda-de-Compromissos-com-Associacao-entre-Objetos\AgendaCompromissos.Console\obj\Debug\net9.0\AgendaCompromissos.Console.genruntimeconfig.cache
 C:\Users\joaop\GitHub\Sistema-de-Agenda-de-Compromissos-com-Associacao-entre-Objetos\AgendaCompromissos.Console\obj\Debug\net9.0\ref\AgendaCompromissos.Console.dll
+C:\Users\joaop\GitHub\Sistema-de-Agenda-de-Compromissos-com-Associacao-entre-Objetos\AgendaCompromissos.Console\obj\Debug\net9.0\AgendaCompromissos.Console.csproj.AssemblyReference.cache

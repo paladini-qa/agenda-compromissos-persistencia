@@ -1,2 +1,3 @@
-﻿namespace AgendaCompromissos.Modelo;
+﻿using AgendaCompromissos.Modelo;
+
 
