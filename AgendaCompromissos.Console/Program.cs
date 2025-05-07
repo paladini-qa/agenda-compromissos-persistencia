@@ -17,59 +17,79 @@ Console.WriteLine("Informe a descrição do compromisso:");
 string descricao = Console.ReadLine() ?? string.Empty;  
 
 Console.WriteLine("Informe o local do compromisso:");
-string local = Console.ReadLine() ?? string.Empty;
+string nomeLocal = Console.ReadLine() ?? string.Empty;
 
-Compromisso compromisso = new Compromisso(data, hora, descricao, usuario, local);
+Console.WriteLine("Informe a capacidade do local:");
+int capacidade = int.Parse(Console.ReadLine() ?? string.Empty);
 
-Console.WriteLine("Deseja adicionar um participante? (s/n)");
-string resposta = Console.ReadLine() ?? string.Empty;
+Local local = new Local { Nome = nomeLocal, Capacidade = capacidade };
 
-while(true)
+Compromisso compromisso;
+
+try
 {
+    compromisso = new Compromisso(data, hora, descricao, usuario, local);
+}
+catch (ArgumentException ex)
+{
+    Console.WriteLine($"Erro ao criar compromisso: {ex.Message}");
+    return;
+}
+
+while (true)
+{
+
+    Console.WriteLine("Deseja adicionar um participante? (s/n)");
+    string resposta = Console.ReadLine()?.ToLower() ?? "n";
+    if (resposta == "n") break;
+
     if(resposta.ToLower() == "s")
     {
         Console.WriteLine("Informe o nome do participante:");
         string nomeParticipante = Console.ReadLine() ?? string.Empty;
         
         Participante participante = new Participante { Nome = nomeParticipante };
-        compromisso.AdicionarParticipante(participante);
-    }
-    else if(resposta.ToLower() == "n")
-    {
-        break;
+        try 
+        {
+            compromisso.AdicionarParticipante(participante);
+        } 
+        catch (ArgumentException ex) 
+        {
+            Console.WriteLine($"Erro ao adicionar participante: {ex.Message}");
+        }
     }
     else
     {
-        Console.WriteLine("Resposta inválida. Digite 's' para sim ou 'n' para não.");
+        Console.WriteLine("Resposta inválida.");
     }
 
-    Console.WriteLine("Deseja adicionar outro participante? (s/n)");
-    resposta = Console.ReadLine() ?? string.Empty;
 }   
 
-Console.WriteLine("Deseja adicionar uma anotação? (s/n)");
-string texto = Console.ReadLine() ?? string.Empty;
-
-while(true)
+while (true)
 {
-    if(texto.ToLower() == "s")
+
+    Console.WriteLine("Deseja adicionar uma anotação? (s/n)");
+    string resposta = Console.ReadLine()?.ToLower() ?? "n";
+    if (resposta == "n") break;
+
+    if(resposta.ToLower() == "s")
     {
-        Console.WriteLine("Informe o texto da anotação:");
-        string anotacaoTexto = Console.ReadLine() ?? string.Empty;
+        Console.WriteLine("Informe a anotação:");
+        string anotacao = Console.ReadLine() ?? string.Empty;
         
-        Anotacao anotacao = new Anotacao(anotacaoTexto);
-        compromisso.AdicionarAnotacao(anotacao);
-    }
-    else if(texto.ToLower() == "n")
-    {
-        break;
+        try 
+        {
+            compromisso.AdicionarAnotacao(anotacao);
+        } 
+        catch (ArgumentException ex) 
+        {
+            Console.WriteLine($"Erro ao adicionar anotação: {ex.Message}");
+        }
     }
     else
     {
-        Console.WriteLine("Resposta inválida. Digite 's' para sim ou 'n' para não.");
+        Console.WriteLine("Resposta inválida.");
     }
 
-    Console.WriteLine("Deseja adicionar outra anotação? (s/n)");
-    texto = Console.ReadLine() ?? string.Empty;
 }
-
+Console.WriteLine("\n===== Compromisso Criado =====\n");

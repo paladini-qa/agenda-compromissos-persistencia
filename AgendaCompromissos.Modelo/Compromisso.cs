@@ -8,7 +8,7 @@ public class Compromisso
     public TimeSpan Hora {get; set;}
     public string Descricao{get; set;}
     public Usuario Usuario; // ASSOCIAÇÃO SIMPLES
-    public string Local;
+    public Local Local; // ASSOCIAÇÃO SIMPLES
     public List<Participante> Participantes = []; // ASSOCIAÇÃO N:N
     public List<Anotacao> Anotacoes = []; // COMPOSIÇÃO
     public List<string> ErrosDeValidacao = [];
@@ -18,7 +18,7 @@ public class Compromisso
         TimeSpan hora,
         string descricao,
         Usuario usuario,
-        string local)
+        Local local)
     {
         if (!ValidarCompromisso(data, hora, descricao))
         {
@@ -32,17 +32,31 @@ public class Compromisso
         Local = local;
     } 
 
- public bool ValidarCompromisso(DateTime data, TimeSpan hora, String descricao) {
+    public bool ValidarCompromisso(DateTime data, TimeSpan hora, string descricao) {
+        ErrosDeValidacao.Clear(); 
+
         DateTime dataAtual = DateTime.Today.AddDays(1);
-        if ( data < dataAtual ) {
-             ErrosDeValidacao.Add($"A data {data.ToString("dd/MM/yyyy")} precisa ser no mínimo {dataAtual.ToString("dd/MM/yyyy")}");
+        
+        
+        if (!DateTime.TryParseExact(data.ToString("dd/MM/yyyy"), 
+                    "dd/MM/yyyy", 
+                    System.Globalization.CultureInfo.GetCultureInfo("pt-BR"),
+                    System.Globalization.DateTimeStyles.None, 
+                    out DateTime _data)) 
+        {
+            throw new Exception($"A {data} é inválida.");
+        } else if ( data < dataAtual ) 
+        {
+            ErrosDeValidacao.Add($"A data {data.ToString("dd/MM/yyyy")} precisa ser no mínimo {dataAtual.ToString("dd/MM/yyyy")}");
         }
-        if( descricao == null){
-             ErrosDeValidacao.Add($"A descrição precisa estar preenchida");
+
+
+        if(string.IsNullOrWhiteSpace(descricao)){
+             ErrosDeValidacao.Add("A descrição precisa estar preenchida.");
         }
         if(hora.TotalHours < 0 || hora.TotalHours >= 24)
         {
-            ErrosDeValidacao.Add($"A hora {hora.ToString("hh/:mm")} precisa estar entre 00:00 e 23:59)");
+            ErrosDeValidacao.Add($"A hora {hora.ToString("hh/:mm")} precisa estar entre 00:00 e 23:59.)");
         }
         return ErrosDeValidacao.Count == 0;
 
@@ -50,18 +64,18 @@ public class Compromisso
 
  public void AdicionarParticipante(Participante participante) {
 
-        if (participante.Nome == null ) {
-            throw new ArgumentNullException($"O participante precisa ter um nome");
+        if (string.IsNullOrWhiteSpace(participante.Nome)) {
+            throw new ArgumentException("O participante precisa ter um nome.");
         }
         Participantes.Add(participante);
     }
 
-    public void AdicionarAnotacao(Anotacao anotacao) {
+    public void AdicionarAnotacao(string texto) {
 
-        if (anotacao.Texto == null ) {
-            throw new ArgumentNullException($"A anotação precisa estar preenchida");
+        if (string.IsNullOrWhiteSpace(texto)) {
+            throw new ArgumentException("A anotação precisa estar preenchida.");
         }
-        Anotacoes.Add(anotacao);
+        Anotacoes.Add(new Anotacao(texto));
     }
 
 }
