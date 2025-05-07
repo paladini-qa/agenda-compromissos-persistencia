@@ -29,6 +29,7 @@ Compromisso compromisso;
 try
 {
     compromisso = new Compromisso(data, hora, descricao, usuario, local);
+    usuario.AdicionarCompromisso(compromisso);
 }
 catch (ArgumentException ex)
 {
