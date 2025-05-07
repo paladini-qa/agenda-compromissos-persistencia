@@ -1,0 +1,15 @@
+C:\Users\joaop\GitHub\Sistema-de-Agenda-de-Compromissos-com-Associacao-entre-Objetos\AgendaCompromissos.Console\bin\Debug\net9.0\AgendaCompromissos.Console.exe
+C:\Users\joaop\GitHub\Sistema-de-Agenda-de-Compromissos-com-Associacao-entre-Objetos\AgendaCompromissos.Console\bin\Debug\net9.0\AgendaCompromissos.Console.deps.json
+C:\Users\joaop\GitHub\Sistema-de-Agenda-de-Compromissos-com-Associacao-entre-Objetos\AgendaCompromissos.Console\bin\Debug\net9.0\AgendaCompromissos.Console.runtimeconfig.json
+C:\Users\joaop\GitHub\Sistema-de-Agenda-de-Compromissos-com-Associacao-entre-Objetos\AgendaCompromissos.Console\bin\Debug\net9.0\AgendaCompromissos.Console.dll
+C:\Users\joaop\GitHub\Sistema-de-Agenda-de-Compromissos-com-Associacao-entre-Objetos\AgendaCompromissos.Console\bin\Debug\net9.0\AgendaCompromissos.Console.pdb
+C:\Users\joaop\GitHub\Sistema-de-Agenda-de-Compromissos-com-Associacao-entre-Objetos\AgendaCompromissos.Console\obj\Debug\net9.0\AgendaCompromissos.Console.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\joaop\GitHub\Sistema-de-Agenda-de-Compromissos-com-Associacao-entre-Objetos\AgendaCompromissos.Console\obj\Debug\net9.0\AgendaCompromissos.Console.AssemblyInfoInputs.cache
+C:\Users\joaop\GitHub\Sistema-de-Agenda-de-Compromissos-com-Associacao-entre-Objetos\AgendaCompromissos.Console\obj\Debug\net9.0\AgendaCompromissos.Console.AssemblyInfo.cs
+C:\Users\joaop\GitHub\Sistema-de-Agenda-de-Compromissos-com-Associacao-entre-Objetos\AgendaCompromissos.Console\obj\Debug\net9.0\AgendaCompromissos.Console.csproj.CoreCompileInputs.cache
+C:\Users\joaop\GitHub\Sistema-de-Agenda-de-Compromissos-com-Associacao-entre-Objetos\AgendaCompromissos.Console\obj\Debug\net9.0\AgendaCompromissos.Console.sourcelink.json
+C:\Users\joaop\GitHub\Sistema-de-Agenda-de-Compromissos-com-Associacao-entre-Objetos\AgendaCompromissos.Console\obj\Debug\net9.0\AgendaCompromissos.Console.dll
+C:\Users\joaop\GitHub\Sistema-de-Agenda-de-Compromissos-com-Associacao-entre-Objetos\AgendaCompromissos.Console\obj\Debug\net9.0\refint\AgendaCompromissos.Console.dll
+C:\Users\joaop\GitHub\Sistema-de-Agenda-de-Compromissos-com-Associacao-entre-Objetos\AgendaCompromissos.Console\obj\Debug\net9.0\AgendaCompromissos.Console.pdb
+C:\Users\joaop\GitHub\Sistema-de-Agenda-de-Compromissos-com-Associacao-entre-Objetos\AgendaCompromissos.Console\obj\Debug\net9.0\AgendaCompromissos.Console.genruntimeconfig.cache
+C:\Users\joaop\GitHub\Sistema-de-Agenda-de-Compromissos-com-Associacao-entre-Objetos\AgendaCompromissos.Console\obj\Debug\net9.0\ref\AgendaCompromissos.Console.dll
