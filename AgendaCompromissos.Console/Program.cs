@@ -7,3 +7,7 @@ string nome = Console.ReadLine() ?? string.Empty;
 
 Usuario usuario = new Usuario(nome);
 
+Console.WriteLine("Informe a data do compromisso (dd/MM/yyyy):");
+DateTime data = DateTime.Parse(Console.ReadLine() ?? string.Empty);
+
+
