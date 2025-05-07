@@ -12,7 +12,6 @@ public class Participante
         if (!Compromissos.Contains(compromisso))
         {
             Compromissos.Add(compromisso);
-            compromisso.Participantes.Add(this);
         }
     }
 
