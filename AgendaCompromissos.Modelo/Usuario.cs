@@ -5,7 +5,7 @@ namespace AgendaCompromissos.Modelo;
 public class Usuario
 {
   //private DateTime _dataAtual = DateTime.Today.AddDays(1);
-  public required string Nome{get; set;}
+  private string _nome {get; set;}
   private readonly List<Compromisso> _compromisso = [];
   public IReadOnlyList<Compromisso> Compromissos
     {
@@ -16,6 +16,11 @@ public class Usuario
     }
 
     public List<string> ErrosDeValidacao = [];
+
+    public Usuario(string nome)
+    {
+        _nome = nome;
+    }
 
     public void AdicionarCompromisso(Compromisso compromisso) {
       DateTime dataAtual = DateTime.Today.AddDays(1);
