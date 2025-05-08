@@ -78,27 +78,12 @@ while (true)
         }while(string.IsNullOrWhiteSpace(nomelocal));
 
 int capacidade;
-/*
-do
-{
-    Console.WriteLine("Informe a capacidade do local:");
-     entrada2 = Console.ReadLine();
 
-    if (!int.TryParse(entrada2, out capacidade) || capacidade < 1)
-    {
-        Console.WriteLine("A capacidade deve ser no mínimo 1.");
-    }
 
-} while (entrada2 == null);
-*/
-
-       // do{
+       
         Console.WriteLine("Informe a capacidade do local, em formato numérico:");
          capacidade = int.Parse(Console.ReadLine() ?? string.Empty);
 
-        // if(capacidade < 1 )
-        // { Console.WriteLine("A capacidade deve ser de no mínimo 1");}
-       // }while(capacidade < 1);
 
  Local local=null;
 
