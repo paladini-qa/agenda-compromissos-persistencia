@@ -1,4 +1,4 @@
-using AgendaCompromissos.Modelo;
+﻿using AgendaCompromissos.Modelo;
 using System.Globalization;
 
 CultureInfo culturaBrasileira = new("pt-BR");
@@ -93,7 +93,7 @@ do
 */
 
        // do{
-        Console.WriteLine("Informe a capacidade do local:");
+        Console.WriteLine("Informe a capacidade do local, em formato numérico:");
          capacidade = int.Parse(Console.ReadLine() ?? string.Empty);
 
         // if(capacidade < 1 )
