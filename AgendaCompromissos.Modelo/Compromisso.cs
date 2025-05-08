@@ -42,13 +42,6 @@ public class Compromisso
             ErrosDeValidacao.Add($"A data {data.ToString("dd/MM/yyyy")} precisa ser no mínimo {dataAtual.ToString("dd/MM/yyyy")}");
         }
 
-        if (string.IsNullOrWhiteSpace(descricao)){
-             ErrosDeValidacao.Add("A descrição precisa estar preenchida.");
-        }
-        if (hora.TotalHours < 0 || hora.TotalHours >= 24)
-        {
-            ErrosDeValidacao.Add($"A hora {hora.ToString("hh/:mm")} precisa estar entre 00:00 e 23:59.)");
-        }
 
         return ErrosDeValidacao.Count == 0;
 
@@ -59,7 +52,12 @@ public class Compromisso
         if (string.IsNullOrWhiteSpace(participante.Nome)) {
             throw new ArgumentException("O participante precisa ter um nome.");
         }
-        Local.ValidarCapacidade(Participantes.Count + 1);
+
+      int novaQuantidade = Participantes.Count + 1;
+      if (!Local.ValidarCapacidade(novaQuantidade))  
+        {
+            throw new ArgumentException("O número de participantes ultrapassa a capacidade do local.");
+        }
         
         Participantes.Add(participante);
     }
@@ -71,5 +69,11 @@ public class Compromisso
         }
         Anotacoes.Add(new Anotacao(texto));
     }
+
+     //public override string ToString()
+    //{
+       // return $"\nData: {Data.ToString("dd/MM/yyyy")} \nCompromissos:\n ";
+                
+    //}
 
 }

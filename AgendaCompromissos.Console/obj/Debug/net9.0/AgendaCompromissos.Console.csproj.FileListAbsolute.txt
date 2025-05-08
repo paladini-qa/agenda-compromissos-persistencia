@@ -14,3 +14,6 @@ C:\Users\joaop\GitHub\Sistema-de-Agenda-de-Compromissos-com-Associacao-entre-Obj
 C:\Users\joaop\GitHub\Sistema-de-Agenda-de-Compromissos-com-Associacao-entre-Objetos\AgendaCompromissos.Console\obj\Debug\net9.0\AgendaCompromissos.Console.genruntimeconfig.cache
 C:\Users\joaop\GitHub\Sistema-de-Agenda-de-Compromissos-com-Associacao-entre-Objetos\AgendaCompromissos.Console\obj\Debug\net9.0\ref\AgendaCompromissos.Console.dll
 C:\Users\joaop\GitHub\Sistema-de-Agenda-de-Compromissos-com-Associacao-entre-Objetos\AgendaCompromissos.Console\obj\Debug\net9.0\AgendaCompromissos.Console.csproj.AssemblyReference.cache
+C:\Users\joaop\GitHub\Sistema-de-Agenda-de-Compromissos-com-Associacao-entre-Objetos\AgendaCompromissos.Console\bin\Debug\net9.0\AgendaCompromissos.Modelo.dll
+C:\Users\joaop\GitHub\Sistema-de-Agenda-de-Compromissos-com-Associacao-entre-Objetos\AgendaCompromissos.Console\bin\Debug\net9.0\AgendaCompromissos.Modelo.pdb
+C:\Users\joaop\GitHub\Sistema-de-Agenda-de-Compromissos-com-Associacao-entre-Objetos\AgendaCompromissos.Console\obj\Debug\net9.0\AgendaCo.34F4D2E3.Up2Date

@@ -4,15 +4,16 @@ namespace AgendaCompromissos.Modelo;
 
 public class Participante
 {
-    public string? Nome {get; set;}
-    public List<Compromisso> Compromissos { get; set; } = new List<Compromisso>();
-    
+    public string? Nome { get; set; }
+
+    private readonly List<Compromisso> _compromissos = new();
+    public IReadOnlyList<Compromisso> Compromissos => _compromissos;
+
     public void AdicionarCompromisso(Compromisso compromisso)
     {
-        if (!Compromissos.Contains(compromisso))
+        if (!_compromissos.Contains(compromisso))
         {
-            Compromissos.Add(compromisso);
+            _compromissos.Add(compromisso);
         }
     }
-
 }
