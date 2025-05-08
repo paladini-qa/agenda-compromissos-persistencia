@@ -1,4 +1,4 @@
-# Sistema-de-Agenda-de-Compromissos-com-Associa-o-entre-Objetos
+# Sistema-de-Agenda-de-Compromissos-com-Associao-entre-Objetos
 
 Objetivo:
 
