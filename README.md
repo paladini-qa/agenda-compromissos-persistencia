@@ -1,4 +1,5 @@
 # Sistema-de-Agenda-de-Compromissos-com-Associao-entre-Objetos
+Alunos: João Pedro Z S, Emilly Pessuti.
 
 Objetivo:
 
