@@ -10,6 +10,8 @@ do
 {
     Console.WriteLine("Digite o nome do usuário:");
     nome = Console.ReadLine() ?? string.Empty;
+    if(string.IsNullOrWhiteSpace(nome))
+    { Console.WriteLine("O nome deve ser preenchido");}
 } while (string.IsNullOrWhiteSpace(nome));
 
 
@@ -25,6 +27,8 @@ string entrada,descricao,nomelocal;
     do{
     Console.WriteLine("Informe a data do compromisso (dd/MM/yyyy):");
     entrada = Console.ReadLine() ?? string.Empty;
+    if(string.IsNullOrWhiteSpace(entrada))
+    { Console.WriteLine("A data deve ser preenchida");}
     } while(string.IsNullOrWhiteSpace(entrada));
 
     bool valido = DateTime.TryParseExact(
@@ -43,8 +47,12 @@ string entrada,descricao,nomelocal;
 
 while (true)
 {
+    do{
     Console.WriteLine("Informe a hora do compromisso (HH:mm):");
      entrada = Console.ReadLine() ?? string.Empty;
+     if(string.IsNullOrWhiteSpace(entrada))
+    { Console.WriteLine("A hora deve ser preenchida");}
+    }while(string.IsNullOrWhiteSpace(entrada));
 
     if (TimeSpan.TryParseExact(entrada, "hh\\:mm", CultureInfo.InvariantCulture, out hora)
         && hora >= TimeSpan.Zero && hora < TimeSpan.FromHours(24))
@@ -58,25 +66,42 @@ while (true)
         do{
         Console.WriteLine("Informe a descrição do compromisso:");
         descricao = Console.ReadLine() ?? string.Empty;
+        if(string.IsNullOrWhiteSpace(descricao))
+        { Console.WriteLine("A descrição deve ser preenchida");}
         }while(string.IsNullOrWhiteSpace(descricao));
          
         do{
         Console.WriteLine("Informe o local do compromisso:");
          nomelocal = Console.ReadLine() ?? string.Empty;
+         if(string.IsNullOrWhiteSpace(nomelocal))
+        { Console.WriteLine("O nome do local deve ser preenchido");}
         }while(string.IsNullOrWhiteSpace(nomelocal));
 
 int capacidade;
+/*
+do
+{
+    Console.WriteLine("Informe a capacidade do local:");
+     entrada2 = Console.ReadLine();
 
-        do{
+    if (!int.TryParse(entrada2, out capacidade) || capacidade < 1)
+    {
+        Console.WriteLine("A capacidade deve ser no mínimo 1.");
+    }
+
+} while (entrada2 == null);
+*/
+
+       // do{
         Console.WriteLine("Informe a capacidade do local:");
          capacidade = int.Parse(Console.ReadLine() ?? string.Empty);
 
-         if(capacidade <1 )
-         { Console.WriteLine("A capacidade deve ser de no mínimo 1");}
-        }while(capacidade < 1);
+        // if(capacidade < 1 )
+        // { Console.WriteLine("A capacidade deve ser de no mínimo 1");}
+       // }while(capacidade < 1);
 
  Local local=null;
- 
+
 try
 {
      local = new Local(nomelocal, capacidade);
@@ -85,6 +110,7 @@ catch (ArgumentException ex)
 {
     Console.WriteLine($"Erro ao criar o local: {ex.Message}");
 }
+
 
         Compromisso compromisso;
 

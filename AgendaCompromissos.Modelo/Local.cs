@@ -11,7 +11,7 @@ public class Local
     public Local(string nome, int capacidade)
     {
         
-        if (!ValidarCapacidade(capacidade))
+        if (!ValidarValorCapacidade(capacidade))
         {
             throw new ArgumentException(string.Join("\n", ErrosDeValidacao));
         }
@@ -20,13 +20,25 @@ public class Local
     }
 
     // Método para validar a capacidade
+
+    public bool ValidarValorCapacidade(int capacidade)
+    {
+        ErrosDeValidacao.Clear(); 
+
+        if (capacidade < 1)
+        {
+            ErrosDeValidacao.Add("A capacidade deve ser de no mínimo 1.");
+        }
+
+        return ErrosDeValidacao.Count == 0; 
+    }
     public bool ValidarCapacidade(int quantidade)
     {
         ErrosDeValidacao.Clear(); 
 
         if (quantidade > Capacidade)
         {
-            ErrosDeValidacao.Add("A capacidade deve ser de no mínimo 1.");
+            ErrosDeValidacao.Add("A quantidade é maior que a capacidade");
         }
 
         return ErrosDeValidacao.Count == 0; 
