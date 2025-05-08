@@ -1,40 +1,40 @@
-using AgendaCompromissos.Modelo;
+﻿using AgendaCompromissos.Modelo;
 using System.Globalization;
 
 CultureInfo culturaBrasileira = new("pt-BR");
 
 Console.WriteLine("===== Agenda de Compromissos =====\n");
 
-string nome;
-do
-{
-    Console.WriteLine("Digite o nome do usuário:");
-    nome = Console.ReadLine() ?? string.Empty;
-    if(string.IsNullOrWhiteSpace(nome))
-    { Console.WriteLine("O nome deve ser preenchido");}
-} while (string.IsNullOrWhiteSpace(nome));
+string nome = string.Empty;
 
+while (string.IsNullOrWhiteSpace(nome))
+{
+    Console.Write("Digite o nome do usuário: ");
+    nome = Console.ReadLine() ?? "";
+
+    if (string.IsNullOrWhiteSpace(nome))
+        Console.WriteLine("O nome não pode estar em branco.");
+}
 
 Usuario usuario = new Usuario(nome);
+Console.WriteLine("Usuário criado com sucesso.");
 
 DateTime data;
-TimeSpan hora;
-string entrada,descricao,nomelocal;
 
-
- while (true)
+while (true)
 {
-    do{
     Console.WriteLine("Informe a data do compromisso (dd/MM/yyyy):");
-    entrada = Console.ReadLine() ?? string.Empty;
-    if(string.IsNullOrWhiteSpace(entrada))
-    { Console.WriteLine("A data deve ser preenchida");}
-    } while(string.IsNullOrWhiteSpace(entrada));
+    string dataCompromisso = Console.ReadLine() ?? string.Empty;
+
+    if (string.IsNullOrWhiteSpace(dataCompromisso))
+    { 
+        Console.WriteLine("A data deve ser preenchida.");
+    }
 
     bool valido = DateTime.TryParseExact(
-        entrada,
+        dataCompromisso,
         "dd/MM/yyyy",
-        System.Globalization.CultureInfo.InvariantCulture,
+        culturaBrasileira,
         System.Globalization.DateTimeStyles.None,
         out data
     );
@@ -42,65 +42,80 @@ string entrada,descricao,nomelocal;
     if (valido)
         break;
 
-    Console.WriteLine("Formato inválido. Use o formato dd/MM/yyyy\n");
+    Console.WriteLine("Formato inválido. Use o formato dd/MM/yyyy.\n");
 }
+
+TimeSpan hora;
 
 while (true)
 {
-    do{
     Console.WriteLine("Informe a hora do compromisso (HH:mm):");
-     entrada = Console.ReadLine() ?? string.Empty;
-     if(string.IsNullOrWhiteSpace(entrada))
-    { Console.WriteLine("A hora deve ser preenchida");}
-    }while(string.IsNullOrWhiteSpace(entrada));
+    string horaCompromisso = Console.ReadLine() ?? string.Empty;
 
-    if (TimeSpan.TryParseExact(entrada, "hh\\:mm", CultureInfo.InvariantCulture, out hora)
+    if (string.IsNullOrWhiteSpace(horaCompromisso))
+    { 
+        Console.WriteLine("A hora deve ser preenchida.");
+    }
+
+    if (TimeSpan.TryParseExact(horaCompromisso, "hh\\:mm", CultureInfo.InvariantCulture, out hora)
         && hora >= TimeSpan.Zero && hora < TimeSpan.FromHours(24))
     {
         break;
     }
 
-    Console.WriteLine("Hora inválida. Use o formato HH:mm, sendo de 00:00 até 23:59");
+    Console.WriteLine("Hora inválida. Use o formato HH:mm, sendo de 00:00 até 23:59\n");
 }
 
-        do{
-        Console.WriteLine("Informe a descrição do compromisso:");
-        descricao = Console.ReadLine() ?? string.Empty;
-        if(string.IsNullOrWhiteSpace(descricao))
-        { Console.WriteLine("A descrição deve ser preenchida");}
-        }while(string.IsNullOrWhiteSpace(descricao));
-         
-        do{
-        Console.WriteLine("Informe o local do compromisso:");
-         nomelocal = Console.ReadLine() ?? string.Empty;
-         if(string.IsNullOrWhiteSpace(nomelocal))
-        { Console.WriteLine("O nome do local deve ser preenchido");}
-        }while(string.IsNullOrWhiteSpace(nomelocal));
+string descricao, nomelocal;
+
+while(true) 
+{
+    Console.WriteLine("Informe a descrição do compromisso:");
+    descricao = Console.ReadLine() ?? string.Empty;
+
+    if (string.IsNullOrWhiteSpace(descricao))
+    { 
+        Console.WriteLine("A descrição deve ser preenchida.");
+    } else
+    {
+        break;
+    }
+}
+
+while (true)
+{
+    Console.WriteLine("Informe o nome do local do compromisso:");
+    nomelocal = Console.ReadLine() ?? string.Empty;
+
+    if (string.IsNullOrWhiteSpace(nomelocal))
+    { 
+        Console.WriteLine("O nome do local deve ser preenchido.");
+    } else
+    {
+        break;
+    }
+}
 
 int capacidade;
-/*
-do
-{
-    Console.WriteLine("Informe a capacidade do local:");
-     entrada2 = Console.ReadLine();
 
-    if (!int.TryParse(entrada2, out capacidade) || capacidade < 1)
+while (true) {
+    Console.WriteLine("Informe a capacidade do local:");
+    string entradaCompromisso = Console.ReadLine() ?? string.Empty;
+
+    if (string.IsNullOrWhiteSpace(entradaCompromisso))
+    { 
+        Console.WriteLine("A capacidade deve ser preenchida.");
+    }
+    if (!int.TryParse(entradaCompromisso, out capacidade) || capacidade < 1)   
     {
         Console.WriteLine("A capacidade deve ser no mínimo 1.");
+    } else
+    {
+        break;
     }
+}
 
-} while (entrada2 == null);
-*/
-
-       // do{
-        Console.WriteLine("Informe a capacidade do local:");
-         capacidade = int.Parse(Console.ReadLine() ?? string.Empty);
-
-        // if(capacidade < 1 )
-        // { Console.WriteLine("A capacidade deve ser de no mínimo 1");}
-       // }while(capacidade < 1);
-
- Local local=null;
+Local local;
 
 try
 {
@@ -112,79 +127,79 @@ catch (ArgumentException ex)
 }
 
 
-        Compromisso compromisso;
+Compromisso compromisso;
 
-        try
-        {
-            compromisso = new Compromisso(data, hora, descricao, usuario, local);
-            usuario.AdicionarCompromisso(compromisso);
-            Console.WriteLine(usuario);
-        }
-        catch (ArgumentException ex)
-        {
-            Console.WriteLine($"Erro ao criar compromisso: {ex.Message}");
-            return;
-        }
+try
+{
+    local = new Local(nomelocal, capacidade);
+    compromisso = new Compromisso(data, hora, descricao, usuario, local);
+    usuario.AdicionarCompromisso(compromisso);
+    Console.WriteLine(usuario);
+} 
+catch (ArgumentException ex)
+{
+    Console.WriteLine($"Erro ao criar compromisso: {ex.Message}");
+    return;
+}
 
-        while (true)
-        {
+while (true)
+{
 
-            Console.WriteLine("Deseja adicionar um participante? (s/n)");
-            string resposta = Console.ReadLine()?.ToLower() ?? "n";
-            if (resposta == "n") break;
+    Console.WriteLine("Deseja adicionar um participante? (s/n)");
+    string resposta = Console.ReadLine()?.ToLower() ?? "n";
 
-            if (resposta.ToLower() == "s")
-            {
-                Console.WriteLine("Informe o nome do participante:");
-                string nomeParticipante = Console.ReadLine() ?? string.Empty;
+    if (resposta == "n") break;
 
-                Participante participante = new Participante { Nome = nomeParticipante };
-                try
-                {
-                    compromisso.AdicionarParticipante(participante);
-                }
-                catch (ArgumentException ex)
-                {
-                    Console.WriteLine($"Erro ao adicionar participante: {ex.Message}");
-                    break;
-                }
-            }
-            else
-            {
-                Console.WriteLine("Resposta inválida.");
-            }
+    if (resposta.ToLower() == "s")
+    {
+        Console.WriteLine("Informe o nome do participante:");
+        string nomeParticipante = Console.ReadLine() ?? string.Empty;
 
-        }
+    Participante participante = new Participante { Nome = nomeParticipante };
+    try
+    {
+        compromisso.AdicionarParticipante(participante);
+    } catch (ArgumentException ex)
+    {
+        Console.WriteLine($"Erro ao adicionar participante: {ex.Message}");
+        break;
+    }
+    }
+    else
+    {
+        Console.WriteLine("Resposta inválida.");
+    }
 
-        while (true)
-        {
+}
 
-            Console.WriteLine("Deseja adicionar uma anotação? (s/n)");
-            string resposta = Console.ReadLine()?.ToLower() ?? "n";
-            if (resposta == "n") break;
+while (true)
+{
+    Console.WriteLine("Deseja adicionar uma anotação? (s/n)");
+    string resposta = Console.ReadLine()?.ToLower() ?? "n";
 
-            if (resposta.ToLower() == "s")
-            {
-                Console.WriteLine("Informe a anotação:");
-                string anotacao = Console.ReadLine() ?? string.Empty;
+    if (resposta == "n") break;
 
-                try
-                {
-                    compromisso.AdicionarAnotacao(anotacao);
-                }
-                catch (ArgumentException ex)
-                {
-                    Console.WriteLine($"Erro ao adicionar anotação: {ex.Message}");
-                }
-            }
-            else
-            {
-                Console.WriteLine("Resposta inválida.");
-            }
+    if (resposta.ToLower() == "s")
+    {
+        Console.WriteLine("Informe a anotação:");
+        string anotacao = Console.ReadLine() ?? string.Empty;
 
-        }
-        Console.WriteLine("\n===== Compromisso Criado =====");
+    try
+    {
+        compromisso.AdicionarAnotacao(anotacao);
+    }
+    catch (ArgumentException ex)
+    {
+        Console.WriteLine($"Erro ao adicionar anotação: {ex.Message}");
+    }
+    } 
+    else
+    {
+        Console.WriteLine("Resposta inválida.");
+    }
 
+}
 
+Console.WriteLine("\n===== Compromisso Criado =====");
 
 Console.WriteLine(usuario);

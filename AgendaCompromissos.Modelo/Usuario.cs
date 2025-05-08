@@ -43,7 +43,7 @@ public override string ToString()
     var sb = new System.Text.StringBuilder();
     sb.AppendLine($"\nUsuário: {_nome}");
 
-    sb.AppendLine("\nCompromissos:");
+    sb.AppendLine("\nCompromissos:\n");
     if (_compromisso.Count == 0)
     {
         sb.AppendLine("  Nenhum compromisso.");
@@ -53,22 +53,22 @@ public override string ToString()
         foreach (var c in _compromisso)
         {
             sb.AppendLine($"Descrição: {c.Descricao} \nData {c.Data:dd/MM/yyyy} \nHora: {c.Hora:hh\\:mm}");
-            sb.AppendLine($"    Local: {c.Local?.Nome ?? "N/A"}");
+            sb.AppendLine($"Local: {c.Local?.Nome ?? "N/A"}");
 
             if (c.Participantes.Count == 0)
-                sb.AppendLine("    Participantes: Nenhum");
+                sb.AppendLine("Participantes: Nenhum");
             else
             {
-                sb.AppendLine("    Participantes:");
+                sb.AppendLine("Participantes:");
                 foreach (var p in c.Participantes)
                     sb.AppendLine($"      - {p.Nome}");
             }
 
             if (c.Anotacoes.Count == 0)
-                sb.AppendLine("    Anotações: Nenhuma");
+                sb.AppendLine("Anotações: Nenhuma");
             else
             {
-                sb.AppendLine("    Anotações:");
+                sb.AppendLine("Anotações:");
                 foreach (var a in c.Anotacoes)
                     sb.AppendLine($"      - {a.Texto}");
             }
