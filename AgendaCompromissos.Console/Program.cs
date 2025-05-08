@@ -10,14 +10,15 @@ string nome = string.Empty;
 while (string.IsNullOrWhiteSpace(nome))
 {
     Console.Write("Digite o nome do usuário: ");
-    nome = Console.ReadLine() ?? "";
+    nome = Console.ReadLine() ?? string.Empty;
 
     if (string.IsNullOrWhiteSpace(nome))
+    {
         Console.WriteLine("O nome não pode estar em branco.");
+    }
 }
 
 Usuario usuario = new Usuario(nome);
-Console.WriteLine("Usuário criado com sucesso.");
 
 DateTime data;
 
@@ -29,20 +30,23 @@ while (true)
     if (string.IsNullOrWhiteSpace(dataCompromisso))
     { 
         Console.WriteLine("A data deve ser preenchida.");
+        continue;
     }
 
     bool valido = DateTime.TryParseExact(
-        dataCompromisso,
-        "dd/MM/yyyy",
-        culturaBrasileira,
-        System.Globalization.DateTimeStyles.None,
-        out data
-    );
+                dataCompromisso,
+                "dd/MM/yyyy",
+                culturaBrasileira,
+                System.Globalization.DateTimeStyles.None,
+                out data);
 
-    if (valido)
-        break;
+    if (!valido) 
+    {
+        Console.WriteLine("Formato inválido. Use o formato dd/MM/yyyy.\n");
+        continue;
+    }
 
-    Console.WriteLine("Formato inválido. Use o formato dd/MM/yyyy.\n");
+    break;
 }
 
 TimeSpan hora;
@@ -55,15 +59,14 @@ while (true)
     if (string.IsNullOrWhiteSpace(horaCompromisso))
     { 
         Console.WriteLine("A hora deve ser preenchida.");
-    }
-
+    } 
     if (TimeSpan.TryParseExact(horaCompromisso, "hh\\:mm", CultureInfo.InvariantCulture, out hora)
         && hora >= TimeSpan.Zero && hora < TimeSpan.FromHours(24))
     {
+        Console.WriteLine("Hora inválida. Use o formato HH:mm, sendo de 00:00 até 23:59\n");
         break;
     }
 
-    Console.WriteLine("Hora inválida. Use o formato HH:mm, sendo de 00:00 até 23:59\n");
 }
 
 string descricao, nomelocal;
