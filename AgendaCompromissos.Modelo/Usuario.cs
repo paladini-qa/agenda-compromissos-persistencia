@@ -32,10 +32,15 @@ public class Usuario
         {
           ErrosDeValidacao.Add($"A descrição precisa estar preenchida");
         }
+        if(compromisso.Local.Capacidade < 1)
+        {
+            ErrosDeValidacao.Add("O local precisa ter no mínimo 1 de capacidade.");
+        }
         if(ErrosDeValidacao.Count == 0)
         {
           _compromisso.Add(compromisso);
         }
+        
     }
 
 public override string ToString()
@@ -52,10 +57,20 @@ public override string ToString()
     {
         foreach (var c in _compromisso)
         {
-            sb.AppendLine($"Descrição: {c.Descricao} \nData {c.Data:dd/MM/yyyy} \nHora: {c.Hora:hh\\:mm}");
-            sb.AppendLine($"    Local: {c.Local?.Nome ?? "N/A"}");
+            sb.AppendLine($"Descrição: {c.Descricao} \nData: {c.Data:dd/MM/yyyy} \nHora: {c.Hora:hh\\:mm}");
+            
+            // Local: Nome, capacidade total, quantidade de participantes e restantes
+            int capacidade = c.Local?.Capacidade ?? 0;  // A capacidade total
+            int participantesCount = c.Participantes.Count;  // A quantidade de participantes
+            int capacidadeRestante = capacidade - participantesCount;  // Quantidade restante
 
-            if (c.Participantes.Count == 0)
+            sb.AppendLine($"    Local: {c.Local?.Nome ?? "N/A"}");
+            sb.AppendLine($"    Capacidade total: {capacidade}");
+            sb.AppendLine($"    Participantes: {participantesCount}");
+            sb.AppendLine($"    Vagas restantes: {capacidadeRestante}");
+
+            // Participantes
+            if (participantesCount == 0)
                 sb.AppendLine("    Participantes: Nenhum");
             else
             {
@@ -64,6 +79,7 @@ public override string ToString()
                     sb.AppendLine($"      - {p.Nome}");
             }
 
+            // Anotações
             if (c.Anotacoes.Count == 0)
                 sb.AppendLine("    Anotações: Nenhuma");
             else
@@ -75,7 +91,6 @@ public override string ToString()
         }
     }
     return sb.ToString();
-
 }
 
 }

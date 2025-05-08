@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("AgendaCompromissos.Modelo")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+7f3aed4e2779fa9df746b33baf35dfdaa99a48e6")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+5b6af0cfecdd9a98d8e624ba7795a6b0ab157f66")]
 [assembly: System.Reflection.AssemblyProductAttribute("AgendaCompromissos.Modelo")]
 [assembly: System.Reflection.AssemblyTitleAttribute("AgendaCompromissos.Modelo")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

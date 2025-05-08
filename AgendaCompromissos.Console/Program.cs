@@ -104,16 +104,15 @@ do
 
 try
 {
-     local = new Local(nomelocal, capacidade);
+            local = new Local(nomelocal, capacidade);
 }
 catch (ArgumentException ex)
 {
-    Console.WriteLine($"Erro ao criar o local: {ex.Message}");
+            Console.WriteLine($"Erro ao criar Local: {ex.Message}");
+            return;
 }
 
-
         Compromisso compromisso;
-
         try
         {
             compromisso = new Compromisso(data, hora, descricao, usuario, local);
@@ -131,8 +130,10 @@ catch (ArgumentException ex)
 
             Console.WriteLine("Deseja adicionar um participante? (s/n)");
             string resposta = Console.ReadLine()?.ToLower() ?? "n";
-            if (resposta == "n") break;
-
+            if (resposta == "n") 
+          { 
+            break;
+          }
             if (resposta.ToLower() == "s")
             {
                 Console.WriteLine("Informe o nome do participante:");

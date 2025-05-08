@@ -41,6 +41,10 @@ public class Compromisso
         {
             ErrosDeValidacao.Add($"A data {data.ToString("dd/MM/yyyy")} precisa ser no mínimo {dataAtual.ToString("dd/MM/yyyy")}");
         }
+      //if (!Local.ValidarValorCapacidade(capacidade)) 
+       // {
+          //  ErrosDeValidacao.Add("O local precisa ter no mínimo 1 de capacidade.");
+        //}
 
 
         return ErrosDeValidacao.Count == 0;
