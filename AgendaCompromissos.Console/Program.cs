@@ -60,13 +60,13 @@ while (true)
     { 
         Console.WriteLine("A hora deve ser preenchida.");
     } 
-    if (TimeSpan.TryParseExact(horaCompromisso, "hh\\:mm", CultureInfo.InvariantCulture, out hora)
+    if (TimeSpan.TryParseExact(horaCompromisso, "HH\\:mm", CultureInfo.InvariantCulture, out hora)
         && hora >= TimeSpan.Zero && hora < TimeSpan.FromHours(24))
     {
         Console.WriteLine("Hora inválida. Use o formato HH:mm, sendo de 00:00 até 23:59\n");
-        break;
     }
 
+    break;
 }
 
 string descricao, nomelocal;
@@ -101,13 +101,15 @@ while (true)
 
 int capacidade;
 
-while (true) {
+while (true) 
+{
     Console.WriteLine("Informe a capacidade do local:");
     string entradaCompromisso = Console.ReadLine() ?? string.Empty;
 
     if (string.IsNullOrWhiteSpace(entradaCompromisso))
     { 
         Console.WriteLine("A capacidade deve ser preenchida.");
+        continue;
     }
     if (!int.TryParse(entradaCompromisso, out capacidade) || capacidade < 1)   
     {

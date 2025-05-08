@@ -43,7 +43,6 @@ public override string ToString()
     var sb = new System.Text.StringBuilder();
     sb.AppendLine($"\nUsuário: {_nome}");
 
-    sb.AppendLine("\nCompromissos:\n");
     if (_compromisso.Count == 0)
     {
         sb.AppendLine("  Nenhum compromisso.");
@@ -61,7 +60,7 @@ public override string ToString()
             {
                 sb.AppendLine("Participantes:");
                 foreach (var p in c.Participantes)
-                    sb.AppendLine($"      - {p.Nome}");
+                    sb.AppendLine($"- {p.Nome}");
             }
 
             if (c.Anotacoes.Count == 0)
@@ -70,7 +69,7 @@ public override string ToString()
             {
                 sb.AppendLine("Anotações:");
                 foreach (var a in c.Anotacoes)
-                    sb.AppendLine($"      - {a.Texto}");
+                    sb.AppendLine($"- {a.Texto}");
             }
         }
     }
