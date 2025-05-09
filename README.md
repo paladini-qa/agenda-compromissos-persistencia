@@ -5,7 +5,7 @@
 
 ## Objetivo
 
-Criar uma agenda de compromissos usando a associação entre objetos.
+Criar uma agenda de compromissos usando a associação entre objetos. O sistema permite que o usuário registre compromissos, defina locais, adicione participantes e anotações, garantindo consistência nas informações.
 
 ## Requisitos
 - .NET 6.0 ou superior.
