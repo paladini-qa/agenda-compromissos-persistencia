@@ -56,4 +56,4 @@ As anotações e os paticipantes precisam ser uma lista, para que possa guarda-l
 
 ## Resultado
 
-Ao final, apresenta-se o nome do usuário, a descrição do compromisso, data, hora, local, capacidade, vagas ocupadas, vagas restantes, nomes dos participantes, e as anotações.
+Ao final, apresenta-se o nome do usuário, a descrição do compromisso, data, hora, local, capacidade, vagas ocupadas, vagas restantes, nomes dos participantes, e as anotações, tudo isso para cada compromisso, e pergunta-se se o usuário quer adicionar um novo compromisso.
