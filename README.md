@@ -3,11 +3,14 @@
 **Alunos:** Emilly Pessuti, João Pedro Z. S.
 **Equipe:** 12
 
-## Objetivo:
+## Objetivo
 
 Criar uma agenda de compromissos usando a associação entre objetos.
 
-## Como executar:
+## Requisitos
+- .NET 6.0 ou superior.
+
+## Como executar
 
 1. No terminal, navegue até a pasta do projeto:
 ```bash
@@ -18,7 +21,7 @@ cd AgendaCompromissos.Console
 dotnet run
 ```
 
-## Fluxo do Processo:
+## Fluxo do Processo
 
 1 - Pede-se o nome do usuário.
 
@@ -28,11 +31,11 @@ dotnet run
 
 4 - Pergunta se quer deixar alguma anotção para o compromisso
 
-## Cuidados a serem tomados:
+## Cuidados a serem tomados
 
 No Program, o usuário é obrigado a colocar os dados no formato correto, com exeção da capacidade, pois int nunca será null, por esse motivo se torna explícito para o usuário que ele precisa preencher a capacidade total do local.
 
-### Validações:
+### Validações
 
 1 - Em cada classe coloco suas validações e suas mensagens de erro, no caso ThrowException, para garantir que se algum dado for inválido, o programa pare naquele exato momento
 
@@ -40,7 +43,7 @@ No Program, o usuário é obrigado a colocar os dados no formato correto, com ex
 
 3 - As validações eram sobre a data, que deve ser no mínimo o dia de amanhã, sobre a capacidade ser no minimo maior que 0, e a chegagem da adição de participantes a um compromisso para certificar-se de que a quantidade não ultrapasse a capacidade do local.
 
-### Sobre os campos das classes:
+### Classes
 
 - Alguns campos de algumas classes tinham que ser obrigatoriamente privados, ou seja encapsulados, para garantir a proteção dos dados, pode-se averigurar na pasta AgendaCompromissos.Modelo, em súmula isso é visto na classe Usuário, aonde usou-se o encapsulamento.
 
@@ -50,6 +53,6 @@ Considerando que posso ter vários participantes em vários compromissos, logo �
 
 As anotações e os paticipantes precisam ser uma lista, para que possa guarda-los por completo.
 
-## Resultado:
+## Resultado
 
 Ao final, apresenta-se o nome do usuário, a descrição do compromisso, data, hora, local, capacidade, vagas ocupadas, vagas restantes, nomes dos participantes, e as anotações.
