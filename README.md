@@ -7,7 +7,18 @@
 
 Criar uma agenda de compromissos usando a associação entre objetos. O sistema permite que o usuário registre compromissos, defina locais, adicione participantes e anotações, garantindo consistência nas informações.
 
+## Fluxo do Processo
+
+1 - Pede-se o nome do usuário.
+
+2 - São coletados os dados do compromisso (data, hora, descrição, nome e capacidade do local).
+
+3 - É perguntado ao usuário se deseja adicionar participantes, informando seus nomes.
+
+4 - Por fim, há a opção de adicionar anotação ao compromisso.
+
 ## Requisitos
+
 - .NET 6.0 ou superior.
 
 ## Como executar
@@ -20,16 +31,6 @@ cd AgendaCompromissos.Console
 ```bash
 dotnet run
 ```
-
-## Fluxo do Processo
-
-1 - Pede-se o nome do usuário.
-
-2 - São coletados os dados sobre o compromisso ( data, hora, descrição, nome local, capacidade do local).
-
-3 - É pedido se o usuário quer adicionar um participante informando seus nomes.
-
-4 - Pergunta se quer deixar alguma anotção para o compromisso
 
 ## Cuidados a serem tomados
 
