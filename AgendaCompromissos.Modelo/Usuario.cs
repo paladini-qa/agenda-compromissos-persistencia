@@ -56,13 +56,13 @@ public override string ToString()
     {
         foreach (var c in _compromisso)
         {
-<<<<<<< HEAD
+
             sb.AppendLine($"Descrição: {c.Descricao} \nData {c.Data:dd/MM/yyyy} \nHora: {c.Hora:hh\\:mm}");
             sb.AppendLine($"Local: {c.Local?.Nome ?? "N/A"}");
 
             if (c.Participantes.Count == 0)
                 sb.AppendLine("Participantes: Nenhum");
-=======
+
             sb.AppendLine($"Descrição: {c.Descricao} \nData: {c.Data:dd/MM/yyyy} \nHora: {c.Hora:hh\\:mm}");
             
             // Local: Nome, capacidade total, quantidade de participantes e restantes
@@ -78,7 +78,6 @@ public override string ToString()
             // Participantes
             if (participantesCount == 0)
                 sb.AppendLine("    Participantes: Nenhum");
->>>>>>> bfd9dcafb351e5a4b0720d25cbdcf28f6fa1bf7e
             else
             {
                 sb.AppendLine("Participantes:");
