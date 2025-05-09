@@ -139,7 +139,6 @@ try
     local = new Local(nomelocal, capacidade);
     compromisso = new Compromisso(data, hora, descricao, usuario, local);
     usuario.AdicionarCompromisso(compromisso);
-    Console.WriteLine(usuario);
 } 
 catch (ArgumentException ex)
 {
