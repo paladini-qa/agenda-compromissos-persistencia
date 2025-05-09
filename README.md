@@ -1,6 +1,6 @@
 # SISTEMA DE AGENDA DE COMPROMISSOS COM ASSOCIAÇÃO ENTRE OBJETOS
 
-**Alunos:** Emilly Pessuti, João Pedro Z. S.
+**Alunos:** Emilly Pessuti, João Pedro Z. S, Leonardo.
 **Equipe:** 12
 
 ## Objetivo
