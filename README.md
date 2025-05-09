@@ -11,7 +11,7 @@ Criar uma agenda de compromissos usando a associação entre objetos. O sistema 
 
 1 - Pede-se o nome do usuário.
 
-2 - São coletados os dados do compromisso (data, hora, descrição, nome e capacidade do local).
+2 - São coletados os dados de um, ou mais compromissos (data, hora, descrição, nome e capacidade do local).
 
 3 - É perguntado ao usuário se deseja adicionar participantes, informando seus nomes.
 
