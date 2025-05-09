@@ -1,25 +1,40 @@
 # SISTEMA DE AGENDA DE COMPROMISSOS COM ASSOCIAÇÃO ENTRE OBJETOS
 
-**Alunos:** Emilly Pessuti, João Pedro Z. S, Leonardo.
+**Alunos:** Emilly Pessuti, João Pedro Z. S, Leonardo H.
+
 **Equipe:** 12
 
 ## Objetivo
 
-Criar uma agenda de compromissos usando a associação entre objetos. O sistema permite que o usuário registre compromissos, defina locais, adicione participantes e anotações, garantindo consistência nas informações.
+Desenvolver uma aplicação de console em C# que simule uma agenda de compromissos, aplicando os princípios da Programação Orientada a Objetos (POO). O sistema permite que o usuário:
+
+- Registre compromissos com data e hora.
+
+- Defina o local e sua capacidade.
+
+- Adicione participantes e anotações.
+
+- Garanta a consistência e integridade das informações por meio de validações e associações entre objetos.
 
 ## Fluxo do Processo
 
-1 - Pede-se o nome do usuário.
+1 - Solicita o nome do usuário principal.
 
-2 - São coletados os dados de um, ou mais compromissos (data, hora, descrição, nome e capacidade do local).
+2 - Permite o cadastro de um ou mais compromissos:
 
-3 - É perguntado ao usuário se deseja adicionar participantes, informando seus nomes.
+- Data, hora, descrição.
 
-4 - Por fim, há a opção de adicionar anotação ao compromisso.
+- Nome e capacidade do local.
+
+3 - Pergunta se deseja adicionar participantes.
+
+4 - Oferece a opção de adicionar anotações.
+
+5 - Ao final, exibe todos os compromissos registrados com seus respectivos detalhes.
 
 ## Requisitos
 
-- .NET 6.0 ou superior.
+- [.NET 6.0](https://dotnet.microsoft.com/en-us/download/dotnet/6.0) ou superior.
 
 ## Como executar
 
@@ -34,26 +49,56 @@ dotnet run
 
 ## Cuidados a serem tomados
 
-No Program, o usuário é obrigado a colocar os dados no formato correto, com exceção da capacidade, pois int nunca será null, por esse motivo se torna explícito para o usuário que ele precisa preencher a capacidade total do local.
+O programa exige que os dados sejam digitados em formato válido (ex: datas e horas no formato correto). O campo capacidade do local deve ser obrigatoriamente preenchido com um número maior que zero. Validações interrompem o programa no ponto exato da inconsistência, usando throw para sinalizar erros.
 
-### Validações
+### Validações Implementadas
 
-1 - Em cada classe coloco suas validações e suas mensagens de erro, no caso ThrowException, para garantir que, se algum dado for inválido, o programa pare naquele exato momento.
+- Data e hora: O compromisso deve ser no mínimo para o dia seguinte.
 
-2 - Só é necessário um método para validação em algumas classes, lembrando que no programa uma classe pode reutilizar um método de validação de outra classe.
+- Descrição: Obrigatória.
 
-3 - As validações eram sobre a data, que deve ser no mínimo o dia de amanhã, sobre a capacidade ser no mínimo maior que 0, e a checagem da adição de participantes a um compromisso para certificar-se de que a quantidade não ultrapasse a capacidade do local.
+- Capacidade do local: Deve ser maior que zero.
 
-### Classes
+- Participantes: A quantidade não pode ultrapassar a capacidade definida.
 
-- Alguns campos de algumas classes tinham que ser obrigatoriamente privados, ou seja, encapsulados, para garantir a proteção dos dados, pode-se averiguar na pasta AgendaCompromissos.Modelo, em suma isso é visto na classe Usuário, onde se usou o encapsulamento.
+- Encapsulamento: Listas e atributos sensíveis foram encapsulados para garantir integridade dos dados.
 
-- Na classe Compromisso, houve o uso de associação N:N para o campo de lista de participantes e a lista de anotações, segue a explicação abaixo:
+### Estrutura de Classes
 
-Considerando que posso ter vários participantes em vários compromissos, logo é N:N, e assim como a lista de anotações, os dois só podem existir se, antes, houver um compromisso ( TODO ) já que os dois campos representam a parte de um compromisso.
+- Usuario: Contém os compromissos associados ao usuário. As listas são encapsuladas com acesso somente leitura.
 
-As anotações e os participantes precisam ser uma lista, para poder guardá-los por completo.
+- Compromisso:
+
+    Associação simples com Usuario e Local.
+
+    Associação N:N com Participante.
+
+    Composição com Anotacao.
+
+- Participante: Pode participar de vários compromissos (relação N:N). Inclui atualização bidirecional.
+
+- Anotacao: Existe apenas dentro de um compromisso. Armazena texto e data de criação.
+
+- Local: Nome e capacidade. Valida o limite de participantes.
 
 ## Resultado
 
-Ao final, apresenta-se o nome do usuário, a descrição do compromisso, data, hora, local, capacidade, vagas ocupadas, vagas restantes, nomes dos participantes e as anotações, tudo isso para cada compromisso, e pergunta-se se o usuário quer adicionar um novo compromisso.
+Ao final do processo, o sistema exibe:
+
+- Nome do usuário
+
+- Descrição do compromisso
+
+- Data e hora
+
+- Local e capacidade
+
+- Número de participantes
+
+- Vagas restantes
+
+- Lista de participantes
+
+- Anotações feitas
+
+Depois disso, o usuário pode optar por adicionar outro compromisso.
