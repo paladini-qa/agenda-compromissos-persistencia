@@ -154,7 +154,7 @@ while (true)
     catch (ArgumentException ex)
     {
         Console.WriteLine($"Erro ao criar compromisso: {ex.Message}");
-        return;
+        continue;
     }
 
     while (true)
