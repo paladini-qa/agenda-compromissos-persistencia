@@ -46,7 +46,7 @@ public class Usuario
 public override string ToString()
 {
     var sb = new System.Text.StringBuilder();
-    sb.AppendLine($"\nUsuário: {_nome}");
+    sb.AppendLine($"\nUsuário: {_nome}\n");
 
     if (_compromisso.Count == 0)
     {
@@ -56,14 +56,10 @@ public override string ToString()
     {
         foreach (var c in _compromisso)
         {
-<<<<<<< HEAD
-            sb.AppendLine($"\nDescrição: {c.Descricao} \nData: {c.Data:dd/MM/yyyy} \nHora: {c.Hora:hh\\:mm}");
-=======
 
-            sb.AppendLine($"Descrição: {c.Descricao}");
+            sb.AppendLine($"\nDescrição: {c.Descricao}");
             sb.AppendLine($"Data: {c.Data:dd/MM/yyyy}");
             sb.AppendLine($"Hora: {c.Hora:hh\\:mm}");
->>>>>>> e18da35132d68a861fd97c7da646365eb9514f85
             
             // Local: Nome, capacidade total, quantidade de participantes e restantes
             int capacidade = c.Local?.Capacidade ?? 0;  // A capacidade total
