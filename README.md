@@ -51,6 +51,8 @@ dotnet run
 
 O programa exige que os dados sejam digitados em formato válido (ex: datas e horas no formato correto). O campo capacidade do local deve ser obrigatoriamente preenchido com um número maior que zero. Validações interrompem o programa no ponto exato da inconsistência, usando throw para sinalizar erros.
 
+Só é necessário um método para validação em algumas classes, lembrando que no programa uma classe pode reutilizar um método de validação de outra classe.
+
 ### Validações Implementadas
 
 - Data e hora: O compromisso deve ser no mínimo para o dia seguinte.
