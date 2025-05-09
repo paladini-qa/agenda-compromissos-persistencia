@@ -75,7 +75,7 @@ O programa exige que os dados sejam digitados em formato válido (ex: datas e ho
 
     Composição com Anotacao.
 
-- Participante: Pode participar de vários compromissos (relação N:N). Inclui atualização bidirecional.
+- Participante: Pode participar de vários compromissos (relação N:N).
 
 - Anotacao: Existe apenas dentro de um compromisso. Armazena texto e data de criação.
 
