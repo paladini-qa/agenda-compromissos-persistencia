@@ -100,65 +100,65 @@ while (true)
 }
 
 int capacidade;
-
-while (true) 
+/*
+do
 {
     Console.WriteLine("Informe a capacidade do local:");
-    string entradaCompromisso = Console.ReadLine() ?? string.Empty;
+     entrada2 = Console.ReadLine();
 
-    if (string.IsNullOrWhiteSpace(entradaCompromisso))
-    { 
-        Console.WriteLine("A capacidade deve ser preenchida.");
-        continue;
-    }
-    if (!int.TryParse(entradaCompromisso, out capacidade) || capacidade < 1)   
+    if (!int.TryParse(entrada2, out capacidade) || capacidade < 1)
     {
         Console.WriteLine("A capacidade deve ser no mínimo 1.");
-    } else
-    {
-        break;
     }
-}
 
-Local local;
+} while (entrada2 == null);
+*/
 
-try
-{
-     local = new Local(nomelocal, capacidade);
-}
-catch (ArgumentException ex)
-{
-    Console.WriteLine($"Erro ao criar o local: {ex.Message}");
-}
+       // do{
+        Console.WriteLine("Informe a capacidade do local:");
+         capacidade = int.Parse(Console.ReadLine() ?? string.Empty);
 
+        // if(capacidade < 1 )
+        // { Console.WriteLine("A capacidade deve ser de no mínimo 1");}
+       // }while(capacidade < 1);
 
-Compromisso compromisso;
+ Local local=null;
 
 try
 {
-    local = new Local(nomelocal, capacidade);
-    compromisso = new Compromisso(data, hora, descricao, usuario, local);
-    usuario.AdicionarCompromisso(compromisso);
-    Console.WriteLine(usuario);
-} 
+            local = new Local(nomelocal, capacidade);
+}
 catch (ArgumentException ex)
 {
-    Console.WriteLine($"Erro ao criar compromisso: {ex.Message}");
-    return;
+            Console.WriteLine($"Erro ao criar Local: {ex.Message}");
+            return;
 }
+
+        Compromisso compromisso;
+
+        try
+        {
+            compromisso = new Compromisso(data, hora, descricao, usuario, local);
+            usuario.AdicionarCompromisso(compromisso);
+            Console.WriteLine(usuario);
+        }
+        catch (ArgumentException ex)
+        {
+            Console.WriteLine($"Erro ao criar compromisso: {ex.Message}");
+            return;
+        }
 
 while (true)
 {
 
-    Console.WriteLine("Deseja adicionar um participante? (s/n)");
-    string resposta = Console.ReadLine()?.ToLower() ?? "n";
+            Console.WriteLine("Deseja adicionar um participante? (s/n)");
+            string resposta = Console.ReadLine()?.ToLower() ?? "n";
+            if (resposta == "n") break;
 
-    if (resposta == "n") break;
-
-    if (resposta.ToLower() == "s")
-    {
-        Console.WriteLine("Informe o nome do participante:");
-        string nomeParticipante = Console.ReadLine() ?? string.Empty;
+            if (resposta.ToLower() == "s")
+            {
+                Console.WriteLine("Informe o nome do participante:");
+                string nomeParticipante = Console.ReadLine() ?? string.Empty;
 
     Participante participante = new Participante { Nome = nomeParticipante };
     try

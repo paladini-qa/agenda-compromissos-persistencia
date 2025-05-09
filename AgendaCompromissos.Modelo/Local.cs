@@ -19,7 +19,6 @@ public class Local
         Capacidade = capacidade;
     }
 
-    // Método para validar a capacidade
 
     public bool ValidarValorCapacidade(int capacidade)
     {
@@ -27,7 +26,7 @@ public class Local
 
         if (capacidade < 1)
         {
-            ErrosDeValidacao.Add("A capacidade deve ser de no mínimo 1.");
+            ErrosDeValidacao.Add("A capacidade do local deve ser de no mínimo 1.");
         }
 
         return ErrosDeValidacao.Count == 0; 
