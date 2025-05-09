@@ -17,6 +17,8 @@ do
 
 Usuario usuario = new Usuario(nome);
 
+while(true)
+{
 DateTime data;
 TimeSpan hora;
 string entrada,descricao,nomelocal;
@@ -94,7 +96,7 @@ try
 catch (ArgumentException ex)
 {
             Console.WriteLine($"Erro ao criar Local: {ex.Message}");
-            return;
+            continue;
 }
 
         Compromisso compromisso;
@@ -107,7 +109,7 @@ catch (ArgumentException ex)
         catch (ArgumentException ex)
         {
             Console.WriteLine($"Erro ao criar compromisso: {ex.Message}");
-            return;
+            continue;
         }
 
         while (true)
@@ -170,7 +172,19 @@ catch (ArgumentException ex)
 
         }
         Console.WriteLine("\n===== Compromisso Criado =====");
+        Console.WriteLine(usuario);
+
+Console.WriteLine("\nDeseja adicionar outro compromisso? (s/n)");
+    string continuar = Console.ReadLine()?.ToLower() ?? "n";
+    if (continuar != "s") break;
+
+}
 
 
 
-Console.WriteLine(usuario);
+
+
+
+
+
+

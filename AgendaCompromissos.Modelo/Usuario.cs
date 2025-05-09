@@ -57,7 +57,7 @@ public override string ToString()
     {
         foreach (var c in _compromisso)
         {
-            sb.AppendLine($"Descrição: {c.Descricao} \nData: {c.Data:dd/MM/yyyy} \nHora: {c.Hora:hh\\:mm}");
+            sb.AppendLine($"\nDescrição: {c.Descricao} \nData: {c.Data:dd/MM/yyyy} \nHora: {c.Hora:hh\\:mm}");
             
             // Local: Nome, capacidade total, quantidade de participantes e restantes
             int capacidade = c.Local?.Capacidade ?? 0;  // A capacidade total
