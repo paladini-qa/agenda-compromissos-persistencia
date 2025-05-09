@@ -1,4 +1,4 @@
-# Sistema-de-Agenda-de-Compromissos-com-Associao-entre-Objetos
+# SISTEMA DE AGENDA DE COMPROMISSOS COM ASSOCIAÇÃO ENTRE OBJETOS
 
 **Alunos:** Emilly Pessuti, João Pedro Z. S.
 **Equipe:** 12
@@ -6,6 +6,17 @@
 ## Objetivo:
 
 Criar uma agenda de compromissos usando a associação entre objetos.
+
+## Como executar:
+
+1. No terminal, navegue até a pasta do projeto:
+```bash
+cd AgendaCompromissos.Console
+```
+2. Execute o comando e abaixo e compile o projeto:
+```bash
+dotnet run
+```
 
 ## Fluxo do Processo:
 
@@ -41,15 +52,4 @@ As anotações e os paticipantes precisam ser uma lista, para que possa guarda-l
 
 ## Resultado:
 
- - Ao final, apresenta-se o nome do usuário, a descrição do compromisso, data, hora, local, capacidade, vagas ocupadas, vagas restantes, nomes dos participantes, e as anotações.
-
-## Como executar:
-
-1. No terminal, navegue até a pasta do projeto:
-```bash
-cd AgendaCompromissos.Console
-```
-2. Execute o comando e abaixo e compile o projeto:
-```bash
-dotnet run
-```
+Ao final, apresenta-se o nome do usuário, a descrição do compromisso, data, hora, local, capacidade, vagas ocupadas, vagas restantes, nomes dos participantes, e as anotações.
