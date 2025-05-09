@@ -20,7 +20,7 @@ public class Compromisso
         Usuario usuario,
         Local local)
     {
-        if (!ValidarCompromisso(data, hora, descricao))
+        if (!ValidarCompromisso(data))
         {
             throw new ArgumentException(string.Join("\n", ErrosDeValidacao));
         }
@@ -32,7 +32,7 @@ public class Compromisso
         Local = local;
     } 
 
-    public bool ValidarCompromisso(DateTime data, TimeSpan hora, string descricao) {
+    public bool ValidarCompromisso(DateTime data) {
         ErrosDeValidacao.Clear(); 
 
         DateTime dataAtual = DateTime.Today.AddDays(1);
@@ -41,10 +41,6 @@ public class Compromisso
         {
             ErrosDeValidacao.Add($"A data {data.ToString("dd/MM/yyyy")} precisa ser no mínimo {dataAtual.ToString("dd/MM/yyyy")}");
         }
-      //if (!Local.ValidarValorCapacidade(capacidade)) 
-       // {
-          //  ErrosDeValidacao.Add("O local precisa ter no mínimo 1 de capacidade.");
-        //}
 
 
         return ErrosDeValidacao.Count == 0;

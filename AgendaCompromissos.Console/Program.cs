@@ -122,9 +122,9 @@ while (true)
             Console.WriteLine("A capacidade deve ser preenchida.");
             continue;
         }
-        if (!int.TryParse(entradaCompromisso, out capacidade) || capacidade < 1)   
+        if (!int.TryParse(entradaCompromisso, out capacidade) )   
         {
-            Console.WriteLine("A capacidade deve ser no mínimo 1.");
+            Console.WriteLine("O valor deve ser um numero.");
         } else
         {
             break;
@@ -153,7 +153,8 @@ while (true)
     } 
     catch (ArgumentException ex)
     {
-        Console.WriteLine($"Erro ao criar compromisso: {ex.Message}");
+        Console.WriteLine($"Erro ao criar compromisso: {ex.Message}\n");
+        Console.WriteLine("Insira novamente os dados do compromisso");
         continue;
     }
 
