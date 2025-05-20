@@ -263,11 +263,16 @@ public class Gerenciador
     {
       Compromisso c = compromissos[i];
 
+       int capacidade = c.Local?.Capacidade ?? 0;  // A capacidade total
+       int participantesCount = c.Participantes.Count;  // A quantidade de participantes
+       int capacidadeRestante = capacidade - participantesCount;
+
       Console.WriteLine($"\n[{i + 1}] {c.Descricao}");
       Console.WriteLine($"Data: {c.Data:dd/MM/yyyy}");
       Console.WriteLine($"Hora: {c.Hora}");
       Console.WriteLine($"Usuário: {c.Usuario?.Nome}");
-      Console.WriteLine($"Local: {c.Local?.Nome} (Capacidade: {c.Local?.Capacidade})");
+      Console.WriteLine($"Local: {c.Local?.Nome} \n(Capacidade Total: {c.Local?.Capacidade})");
+      Console.WriteLine($"Vagas Restantes: {capacidadeRestante}");
 
       if (c.Participantes.Count > 0)
       {
@@ -276,6 +281,11 @@ public class Gerenciador
         {
           Console.WriteLine($"- {p.Nome}");
         }
+      }
+      else
+      {
+        Console.WriteLine("Participantes:");
+        Console.WriteLine("Nenhum");
       }
 
       if (c.Anotacoes.Count > 0)
@@ -286,6 +296,11 @@ public class Gerenciador
           Console.WriteLine($"- {a}");
         }
       }
+      else
+      {
+        Console.WriteLine("Anotações:");
+        Console.WriteLine("Nenhuma");
+      }
     }
   }
   public void EditarCompromisso()
@@ -294,6 +309,27 @@ public class Gerenciador
   }
   public void ExcluirCompromisso()
   {
+    
+    ListarCompromissos();
 
+     string caminho = Path.Combine("Dados", "compromissos.json");
+     List<Compromisso> compromissos = JsonPersistencia.Carregar<Compromisso>(caminho);
+    
+     if (compromissos == null || compromissos.Count == 0)
+    {
+        Console.WriteLine("Não há compromissos para excluir.");
+        return;
+    }
+
+     Console.Write("Digite o número do compromisso que deseja excluir: ");
+        int indice = int.Parse(Console.ReadLine()!) - 1;
+        if (indice < 0 || indice >= compromissos.Count)
+        {
+            Console.WriteLine("Índice inválido.");
+            return;
+        }
+        compromissos.RemoveAt(indice);
+        Console.WriteLine("Compromisso removido.");
+        JsonPersistencia.Salvar(compromissos, caminho);
   }
 }
