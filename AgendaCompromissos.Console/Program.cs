@@ -11,15 +11,16 @@ while (true)
     Console.WriteLine("3. Editar compromisso");
     Console.WriteLine("4. Excluir compromisso");
     Console.WriteLine("0. Sair\n");
+
     Console.Write("Escolha uma opção: ");
     string opcao = Console.ReadLine() ?? "";
-    if (opcao == "0")
-    {
-        Console.WriteLine("Saindo...");
-        Environment.Exit(0);
-    }
+
     switch (opcao)
     {
+        case "0":
+            Console.WriteLine("Saindo...");
+            Environment.Exit(0);
+            break;
         case "1":
 
             break;
