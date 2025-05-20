@@ -1,5 +1,4 @@
-AgendaCompromissos.Modelo\bin
-AgendaCompromissos.Modelo\obj
-
-AgendaCompromissos.Console\bin
-AgendaCompromissos.Console\obj
+AgendaCompromissos.Modelo/bin/
+AgendaCompromissos.Modelo/obj/
+AgendaCompromissos.Console/bin/
+AgendaCompromissos.Console/obj/
