@@ -239,7 +239,54 @@ public class Gerenciador
   }
   public void ListarCompromissos()
   {
+    string caminho = Path.Combine("Dados", "compromissos.json");
 
+    if (!File.Exists(caminho))
+    {
+      Console.WriteLine("Nenhum compromisso encontrado.");
+      return;
+    }
+
+    List<Compromisso> compromissos = JsonPersistencia.Carregar<Compromisso>(caminho);
+
+    int quantidadeCompromisso = compromissos.Count;
+
+    if (quantidadeCompromisso == 0)
+    {
+      Console.WriteLine("Nenhum compromisso cadastrado.");
+      return;
+    }
+
+    Console.WriteLine("\n===== Lista de Compromissos =====");
+
+    for (int i = 0; i < quantidadeCompromisso; i++)
+    {
+      Compromisso c = compromissos[i];
+
+      Console.WriteLine($"\n[{i + 1}] {c.Descricao}");
+      Console.WriteLine($"Data: {c.Data:dd/MM/yyyy}");
+      Console.WriteLine($"Hora: {c.Hora}");
+      Console.WriteLine($"Usuário: {c.Usuario?.Nome}");
+      Console.WriteLine($"Local: {c.Local?.Nome} (Capacidade: {c.Local?.Capacidade})");
+
+      if (c.Participantes.Count > 0)
+      {
+        Console.WriteLine("Participantes:");
+        foreach (var p in c.Participantes)
+        {
+          Console.WriteLine($"- {p.Nome}");
+        }
+      }
+
+      if (c.Anotacoes.Count > 0)
+      {
+        Console.WriteLine("Anotações:");
+        foreach (var a in c.Anotacoes)
+        {
+          Console.WriteLine($"- {a}");
+        }
+      }
+    }
   }
   public void EditarCompromisso()
   {

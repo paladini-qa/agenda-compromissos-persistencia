@@ -1,15 +1,20 @@
 using System.Text.Json;
+using System.Text.Json.Serialization;
 
 namespace AgendaCompromissos.ConsoleApp.Utils;
 
 public static class JsonPersistencia
 {
-  public static void Salvar<T>(List<T> dados, string caminho)
+  private static JsonSerializerOptions options = new JsonSerializerOptions
   {
-    var json = JsonSerializer.Serialize(dados, new JsonSerializerOptions { WriteIndented = true });
+    WriteIndented = true,
+    ReferenceHandler = ReferenceHandler.Preserve //suporte a referencias
+  };
+  public static void Salvar<T>(List<T> dados, string caminho)
+  {    
+    var json = JsonSerializer.Serialize(dados, options);
     File.WriteAllText(caminho, json);
   }
-
   public static List<T> Carregar<T>(string caminho)
   {
     if (!File.Exists(caminho))
@@ -17,9 +22,9 @@ public static class JsonPersistencia
 
     var json = File.ReadAllText(caminho);
 
-    if (string.IsNullOrWhiteSpace(json)) // ← isso evita o erro
+    if (string.IsNullOrWhiteSpace(json))
       return new List<T>();
 
-    return JsonSerializer.Deserialize<List<T>>(json) ?? new List<T>();
+    return JsonSerializer.Deserialize<List<T>>(json, options) ?? new List<T>();
   }
 }

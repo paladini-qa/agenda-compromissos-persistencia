@@ -1,7 +1,157 @@
-[
-  {
-    "Data": "2025-05-25T00:00:00",
-    "Hora": "14:00:00",
-    "Descricao": "teste vitor"
-  }
-]
+{
+  "$id": "1",
+  "$values": [
+    {
+      "$id": "2",
+      "Data": "2025-05-25T00:00:00",
+      "Hora": "14:00:00",
+      "Descricao": "teste vitor",
+      "Usuario": null,
+      "Local": null,
+      "Participantes": {
+        "$id": "3",
+        "$values": []
+      },
+      "Anotacoes": {
+        "$id": "4",
+        "$values": []
+      },
+      "ErrosDeValidacao": {
+        "$id": "5",
+        "$values": []
+      }
+    },
+    {
+      "$id": "6",
+      "Data": "2025-05-25T00:00:00",
+      "Hora": "11:00:00",
+      "Descricao": "Reuni\u00E3o",
+      "Usuario": {
+        "$id": "7",
+        "Nome": "Layssa",
+        "Compromissos": {
+          "$id": "8",
+          "$values": [
+            {
+              "$ref": "6"
+            }
+          ]
+        },
+        "ErrosDeValidacao": {
+          "$id": "9",
+          "$values": []
+        }
+      },
+      "Local": {
+        "$id": "10",
+        "Nome": "Sala 18",
+        "Capacidade": 21,
+        "ErrosDeValidacao": {
+          "$id": "11",
+          "$values": []
+        }
+      },
+      "Participantes": {
+        "$id": "12",
+        "$values": [
+          {
+            "$id": "13",
+            "Nome": "Lorena",
+            "Compromissos": {
+              "$id": "14",
+              "$values": []
+            }
+          },
+          {
+            "$id": "15",
+            "Nome": "Lais",
+            "Compromissos": {
+              "$id": "16",
+              "$values": []
+            }
+          }
+        ]
+      },
+      "Anotacoes": {
+        "$id": "17",
+        "$values": [
+          {
+            "$id": "18",
+            "Texto": "Reuni\u00E3o de alinhamento",
+            "Data": "2025-05-20T16:26:25.925015-03:00"
+          }
+        ]
+      },
+      "ErrosDeValidacao": {
+        "$id": "19",
+        "$values": []
+      }
+    },
+    {
+      "$id": "20",
+      "Data": "2025-05-25T00:00:00",
+      "Hora": "11:00:00",
+      "Descricao": "Reuniao alinhamento",
+      "Usuario": {
+        "$id": "21",
+        "Nome": "Layssa",
+        "Compromissos": {
+          "$id": "22",
+          "$values": [
+            {
+              "$ref": "20"
+            }
+          ]
+        },
+        "ErrosDeValidacao": {
+          "$id": "23",
+          "$values": []
+        }
+      },
+      "Local": {
+        "$id": "24",
+        "Nome": "Sala 18",
+        "Capacidade": 2,
+        "ErrosDeValidacao": {
+          "$id": "25",
+          "$values": []
+        }
+      },
+      "Participantes": {
+        "$id": "26",
+        "$values": [
+          {
+            "$id": "27",
+            "Nome": "Lore",
+            "Compromissos": {
+              "$id": "28",
+              "$values": []
+            }
+          },
+          {
+            "$id": "29",
+            "Nome": "Lais",
+            "Compromissos": {
+              "$id": "30",
+              "$values": []
+            }
+          }
+        ]
+      },
+      "Anotacoes": {
+        "$id": "31",
+        "$values": [
+          {
+            "$id": "32",
+            "Texto": "Reuniao de alinhamento",
+            "Data": "2025-05-20T16:51:51.132663-03:00"
+          }
+        ]
+      },
+      "ErrosDeValidacao": {
+        "$id": "33",
+        "$values": []
+      }
+    }
+  ]
+}
