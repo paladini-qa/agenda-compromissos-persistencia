@@ -9,6 +9,8 @@ public class Participante
     private readonly List<Compromisso> _compromissos = new();
     public IReadOnlyList<Compromisso> Compromissos => _compromissos;
 
+    public Participante() {}
+
     public void AdicionarCompromisso(Compromisso compromisso)
     {
         if (!_compromissos.Contains(compromisso))

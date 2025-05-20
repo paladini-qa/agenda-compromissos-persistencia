@@ -4,57 +4,64 @@ namespace AgendaCompromissos.Modelo;
 
 public class Usuario
 {
-  //private DateTime _dataAtual = DateTime.Today.AddDays(1);
-   private readonly string _nome;
-  private readonly List<Compromisso> _compromisso = [];
-  public IReadOnlyList<Compromisso> Compromissos
-    {
-        get
-        {
-            return _compromisso;
-        }
-    }
+    //private readonly string _nome;
+    public string Nome { get; set;  }
+    public List<Compromisso> Compromissos { get; set; } = new();
 
-    public Usuario(string nome)
-    {
-        _nome = nome;
-    }
+    //private readonly List<Compromisso> _compromisso = [];
+    // public IReadOnlyList<Compromisso> Compromissos
+    // {
+    //     get
+    //     {
+    //         return _compromisso;
+    //     }
+    // }
 
-    public List<string> ErrosDeValidacao = [];
+    // public Usuario(string nome)
+    // {
+    //     _nome = nome;
+    // }
+
+    public List<string> ErrosDeValidacao { get; set;  } = new();
+    
+    public Usuario() {}
+    public Usuario(string nome) {
+        Nome = nome;
+    }
 
     public void AdicionarCompromisso(Compromisso compromisso) {
-      DateTime dataAtual = DateTime.Today.AddDays(1);
+        DateTime dataAtual = DateTime.Today.AddDays(1);
 
-        if (compromisso.Data < dataAtual ) {
+        if (compromisso.Data < dataAtual) {
             ErrosDeValidacao.Add($"{compromisso.Data.ToString("dd/MM/yyyy")} precisa ser no minimo {dataAtual.ToString("dd/MM/yyyy")}");
         }
-        if(compromisso.Descricao == null)
+        if (compromisso.Descricao == null)
         {
-          ErrosDeValidacao.Add($"A descrição precisa estar preenchida");
+            ErrosDeValidacao.Add($"A descrição precisa estar preenchida");
         }
-        if(compromisso.Local.Capacidade < 1)
+        if (compromisso.Local.Capacidade < 1)
         {
             ErrosDeValidacao.Add("O local precisa ter no mínimo 1 de capacidade.");
         }
-        if(ErrosDeValidacao.Count == 0)
+        if (ErrosDeValidacao.Count == 0)
         {
-          _compromisso.Add(compromisso);
+            Compromissos.Add(compromisso);
         }
-        
+
     }
 
 public override string ToString()
 {
     var sb = new System.Text.StringBuilder();
-    sb.AppendLine($"\nUsuário: {_nome}\n");
+    sb.AppendLine($"\nUsuário: {Nome}\n");
 
-    if (_compromisso.Count == 0)
+    if (Compromissos.Count == 0)
     {
         sb.AppendLine("  Nenhum compromisso.");
     }
     else
     {
-        foreach (var c in _compromisso)
+        foreach (var c in Compromissos)
         {
 
             sb.AppendLine($"\nDescrição: {c.Descricao}");

@@ -4,13 +4,15 @@ namespace AgendaCompromissos.Modelo;
 
 public class Local
 {
-    public string Nome {get; set;}
+    public string? Nome {get; set;}
     public int Capacidade {get; set;}
-    public List<string> ErrosDeValidacao = [];
+    public List<string> ErrosDeValidacao { get; set;  } = new();
+    
+    public Local() {}
 
     public Local(string nome, int capacidade)
     {
-        
+
         if (!ValidarValorCapacidade(capacidade))
         {
             throw new ArgumentException(string.Join("\n", ErrosDeValidacao));

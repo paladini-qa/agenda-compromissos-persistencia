@@ -6,12 +6,14 @@ public class Compromisso
 {
     public DateTime Data { get; set; }
     public TimeSpan Hora { get; set; }
-    public string Descricao { get; set; }
-    public Usuario Usuario; // ASSOCIAÇÃO SIMPLES
-    public Local Local; // ASSOCIAÇÃO SIMPLES
-    public List<Participante> Participantes = []; // ASSOCIAÇÃO N:N
-    public List<Anotacao> Anotacoes = []; // COMPOSIÇÃO
-    public List<string> ErrosDeValidacao = [];
+    public string? Descricao { get; set; }
+    public Usuario? Usuario { get; set; } // ASSOCIAÇÃO SIMPLES
+    public Local? Local { get; set;  } // ASSOCIAÇÃO SIMPLES
+    public List<Participante> Participantes { get; set;  } = new(); // ASSOCIAÇÃO N:N
+    public List<Anotacao> Anotacoes { get; set;  } = new(); // COMPOSIÇÃO
+    public List<string> ErrosDeValidacao { get; set;  } = new();
+
+    public Compromisso () {}
 
     public Compromisso(
         DateTime data,
