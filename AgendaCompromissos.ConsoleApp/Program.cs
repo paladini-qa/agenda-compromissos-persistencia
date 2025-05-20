@@ -1,5 +1,7 @@
 ﻿using AgendaCompromissos.Modelo;
+using AgendaCompromissos.ConsoleApp.Utils;
 
+var gerenciador = new Gerenciador();
 
 while (true)
 {
@@ -22,19 +24,19 @@ while (true)
             Environment.Exit(0);
             break;
         case "1":
-
+            gerenciador.CriarCompromisso();
             break;
 
         case "2":
-
+            gerenciador.ListarCompromissos();
             break;
 
         case "3":
-
+            gerenciador.EditarCompromisso();
             break;
 
         case "4":
-
+            gerenciador.ExcluirCompromisso();
             break;
 
         default:

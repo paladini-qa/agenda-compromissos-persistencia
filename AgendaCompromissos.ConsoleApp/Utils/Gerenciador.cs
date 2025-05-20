@@ -1,12 +1,13 @@
 using System;
 using System.Globalization;
+using AgendaCompromissos.Modelo;
 
-namespace AgendaCompromissos.Modelo;
-
+namespace AgendaCompromissos.ConsoleApp.Utils;
 
 public class Gerenciador
 {
   CultureInfo culturaBrasileira = new("pt-BR");
+
   public void CriarCompromisso()
   {
     string nome = string.Empty;
@@ -43,7 +44,7 @@ public class Gerenciador
                     dataCompromisso,
                     "dd/MM/yyyy",
                     culturaBrasileira,
-                    System.Globalization.DateTimeStyles.None,
+                    DateTimeStyles.None,
                     out data);
 
         if (!valido)
@@ -72,7 +73,7 @@ public class Gerenciador
                     horaCompromisso,
                     "hh\\:mm",
                     culturaBrasileira,
-                    System.Globalization.TimeSpanStyles.None,
+                    TimeSpanStyles.None,
                     out hora);
 
         if (!valido)
@@ -130,7 +131,7 @@ public class Gerenciador
         }
         if (!int.TryParse(entradaCompromisso, out capacidade))
         {
-          Console.WriteLine("O valor deve ser um numero.");
+          Console.WriteLine("O valor deve ser um número.");
         }
         else
         {
@@ -139,17 +140,6 @@ public class Gerenciador
       }
 
       Local local;
-
-      try
-      {
-        local = new Local(nomelocal, capacidade);
-      }
-      catch (ArgumentException ex)
-      {
-        Console.WriteLine($"Erro ao criar o local: {ex.Message}");
-      }
-
-
       Compromisso compromisso;
 
       try
@@ -157,6 +147,72 @@ public class Gerenciador
         local = new Local(nomelocal, capacidade);
         compromisso = new Compromisso(data, hora, descricao, usuario, local);
         usuario.AdicionarCompromisso(compromisso);
+
+        // Participantes
+        while (true)
+        {
+          Console.WriteLine("Deseja adicionar um participante? (s/n)");
+          string resposta = Console.ReadLine()?.ToLower() ?? "n";
+
+          if (resposta == "n") break;
+
+          if (resposta == "s")
+          {
+            Console.WriteLine("Informe o nome do participante:");
+            string nomeParticipante = Console.ReadLine() ?? string.Empty;
+
+            Participante participante = new Participante { Nome = nomeParticipante };
+            try
+            {
+              compromisso.AdicionarParticipante(participante);
+            }
+            catch (ArgumentException ex)
+            {
+              Console.WriteLine($"Erro ao adicionar participante: {ex.Message}");
+              break;
+            }
+          }
+          else
+          {
+            Console.WriteLine("Resposta inválida.");
+          }
+        }
+
+        // Anotações
+        while (true)
+        {
+          Console.WriteLine("Deseja adicionar uma anotação? (s/n)");
+          string resposta = Console.ReadLine()?.ToLower() ?? "n";
+
+          if (resposta == "n") break;
+
+          if (resposta == "s")
+          {
+            Console.WriteLine("Informe a anotação:");
+            string anotacao = Console.ReadLine() ?? string.Empty;
+
+            try
+            {
+              compromisso.AdicionarAnotacao(anotacao);
+            }
+            catch (ArgumentException ex)
+            {
+              Console.WriteLine($"Erro ao adicionar anotação: {ex.Message}");
+            }
+          }
+          else
+          {
+            Console.WriteLine("Resposta inválida.");
+          }
+        }
+
+        string caminho = Path.Combine("Dados", "compromissos.json");
+        List<Compromisso> compromissosSalvos = JsonPersistencia.Carregar<Compromisso>(caminho);
+        compromissosSalvos.Add(compromisso);
+        JsonPersistencia.Salvar(compromissosSalvos, caminho);
+
+        Console.WriteLine("\n===== Compromisso Criado =====");
+        Console.WriteLine(usuario);
       }
       catch (ArgumentException ex)
       {
@@ -164,69 +220,6 @@ public class Gerenciador
         Console.WriteLine("Insira novamente os dados do compromisso");
         continue;
       }
-
-      while (true)
-      {
-
-        Console.WriteLine("Deseja adicionar um participante? (s/n)");
-        string resposta = Console.ReadLine()?.ToLower() ?? "n";
-
-        if (resposta == "n") break;
-
-        if (resposta.ToLower() == "s")
-        {
-          Console.WriteLine("Informe o nome do participante:");
-          string nomeParticipante = Console.ReadLine() ?? string.Empty;
-
-          Participante participante = new Participante { Nome = nomeParticipante };
-          try
-          {
-            compromisso.AdicionarParticipante(participante);
-          }
-          catch (ArgumentException ex)
-          {
-            Console.WriteLine($"Erro ao adicionar participante: {ex.Message}");
-            break;
-          }
-        }
-        else
-        {
-          Console.WriteLine("Resposta inválida.");
-        }
-
-      }
-
-      while (true)
-      {
-        Console.WriteLine("Deseja adicionar uma anotação? (s/n)");
-        string resposta = Console.ReadLine()?.ToLower() ?? "n";
-
-        if (resposta == "n") break;
-
-        if (resposta.ToLower() == "s")
-        {
-          Console.WriteLine("Informe a anotação:");
-          string anotacao = Console.ReadLine() ?? string.Empty;
-
-          try
-          {
-            compromisso.AdicionarAnotacao(anotacao);
-          }
-          catch (ArgumentException ex)
-          {
-            Console.WriteLine($"Erro ao adicionar anotação: {ex.Message}");
-          }
-        }
-        else
-        {
-          Console.WriteLine("Resposta inválida.");
-        }
-
-      }
-
-      Console.WriteLine("\n===== Compromisso Criado =====");
-
-      Console.WriteLine(usuario);
 
       Console.WriteLine("\nDeseja adicionar outro compromisso? (s/n)");
       string novoCompromisso = Console.ReadLine()?.ToLower() ?? "n";
@@ -243,5 +236,17 @@ public class Gerenciador
         break;
       }
     }
+  }
+  public void ListarCompromissos()
+  {
+
+  }
+  public void EditarCompromisso()
+  {
+
+  }
+  public void ExcluirCompromisso()
+  {
+
   }
 }
