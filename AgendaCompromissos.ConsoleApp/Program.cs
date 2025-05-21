@@ -29,6 +29,8 @@ while (true)
 
         case "2":
             gerenciador.ListarCompromissos();
+            Console.WriteLine("\nPressione qualquer tecla para continuar...");
+            Console.ReadKey();
             break;
 
         case "3":

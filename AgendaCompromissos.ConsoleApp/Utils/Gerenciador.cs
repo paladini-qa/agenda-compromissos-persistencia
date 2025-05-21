@@ -323,6 +323,41 @@ public class Gerenciador
 
     while (true)
     {
+      Console.Clear();
+      Console.WriteLine("\n===== Compromisso Selecionado =====");
+      Console.WriteLine($"[{indice + 1}] {compromisso.Descricao}");
+      Console.WriteLine($"Data: {compromisso.Data:dd/MM/yyyy}");
+      Console.WriteLine($"Hora: {compromisso.Hora:hh\\:mm}");
+      Console.WriteLine($"Usuário: {compromisso.Usuario?.Nome}");
+      Console.WriteLine($"Local: {compromisso.Local?.Nome} \n(Capacidade Total: {compromisso.Local?.Capacidade})");
+      Console.WriteLine($"Vagas Restantes: {compromisso.Local?.Capacidade - compromisso.Participantes.Count}");
+      if (compromisso.Participantes.Count > 0)
+      {
+        Console.WriteLine("Participantes:");
+        foreach (var p in compromisso.Participantes)
+        {
+          Console.WriteLine($"- {p.Nome}");
+        }
+      }
+      else
+      {
+        Console.WriteLine("Participantes:");
+        Console.WriteLine("Nenhum");
+      }
+      if (compromisso.Anotacoes.Count > 0)
+      {
+        Console.WriteLine("Anotações:");
+        foreach (var a in compromisso.Anotacoes)
+        {
+          Console.WriteLine($"- {a}");
+        }
+      }
+      else
+      {
+        Console.WriteLine("Anotações:");
+        Console.WriteLine("Nenhuma");
+      }
+
       Console.WriteLine("\nO que deseja editar:");
       Console.WriteLine("1 - Data");
       Console.WriteLine("2 - Hora");
@@ -553,7 +588,6 @@ public class Gerenciador
   {
     while (true)
     {
-      Console.Clear();
       Console.WriteLine("=== Participantes do Compromisso ===");
       if (compromisso.Participantes.Count == 0)
       {
@@ -662,7 +696,6 @@ public class Gerenciador
   {
     while (true)
     {
-      Console.Clear();
       Console.WriteLine("=== Anotações do Compromisso ===");
       if (compromisso.Anotacoes.Count == 0)
       {
