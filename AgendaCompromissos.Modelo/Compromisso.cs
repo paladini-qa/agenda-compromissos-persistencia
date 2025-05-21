@@ -80,6 +80,10 @@ public class Compromisso
     {
         Participantes.Remove(participante);
     }
+    public void RemoverAnotacao(Anotacao anotacao)
+    {
+        Anotacoes.Remove(anotacao);
+    }
 
     //public override string ToString()
     //{

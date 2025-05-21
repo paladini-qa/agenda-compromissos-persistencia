@@ -374,7 +374,7 @@ public class Gerenciador
       }
       else if (opcao == "6")
       {
-        //EditarAnotacoes(compromisso);
+        EditarAnotacoes(compromisso);
       }
       else
       {
@@ -637,6 +637,54 @@ public class Gerenciador
     else
     {
       Console.WriteLine("Resposta inválida.");
+    }
+  }
+  private void EditarAnotacoes(Compromisso compromisso)
+  {
+    Console.WriteLine("Deseja adicionar ou remover uma anotação? (a/r/n)");
+    string resposta = Console.ReadLine()?.ToLower() ?? "n";
+
+    if (resposta == "a")
+    {
+      Console.WriteLine("Informe a anotação:");
+      string anotacao = Console.ReadLine() ?? string.Empty;
+
+      try
+      {
+        compromisso.AdicionarAnotacao(anotacao);
+        Console.WriteLine("Anotação adicionada.");
+      }
+      catch (ArgumentException ex)
+      {
+        Console.WriteLine($"Erro ao adicionar anotação: {ex.Message}");
+      }
+    }
+    else if (resposta == "r")
+    {
+      Console.WriteLine("Informe o texto da anotação a ser removida:");
+      string textoAnotacao = Console.ReadLine() ?? string.Empty;
+
+      try
+      {
+        Anotacao? anotacao = compromisso.Anotacoes.FirstOrDefault(a => a.Texto == textoAnotacao);
+        if (anotacao != null)
+        {
+          compromisso.RemoverAnotacao(anotacao);
+          Console.WriteLine("Anotação removida.");
+        }
+        else
+        {
+          Console.WriteLine("Anotação não encontrada.");
+        }
+      }
+      catch (ArgumentException ex)
+      {
+        Console.WriteLine($"Erro ao remover anotação: {ex.Message}");
+      }
+    }
+    else
+    {
+      Console.WriteLine("Nenhuma alteração feita.");
     }
   }
 
