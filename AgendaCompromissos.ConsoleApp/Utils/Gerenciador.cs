@@ -263,13 +263,13 @@ public class Gerenciador
     {
       Compromisso c = compromissos[i];
 
-       int capacidade = c.Local?.Capacidade ?? 0;  // A capacidade total
-       int participantesCount = c.Participantes.Count;  // A quantidade de participantes
-       int capacidadeRestante = capacidade - participantesCount;
+      int capacidade = c.Local?.Capacidade ?? 0;  // A capacidade total
+      int participantesCount = c.Participantes.Count;  // A quantidade de participantes
+      int capacidadeRestante = capacidade - participantesCount;
 
       Console.WriteLine($"\n[{i + 1}] {c.Descricao}");
       Console.WriteLine($"Data: {c.Data:dd/MM/yyyy}");
-      Console.WriteLine($"Hora: {c.Hora}");
+      Console.WriteLine($"Hora: {c.Hora:hh\\:mm}");
       Console.WriteLine($"Usuário: {c.Usuario?.Nome}");
       Console.WriteLine($"Local: {c.Local?.Nome} \n(Capacidade Total: {c.Local?.Capacidade})");
       Console.WriteLine($"Vagas Restantes: {capacidadeRestante}");
@@ -306,30 +306,258 @@ public class Gerenciador
   public void EditarCompromisso()
   {
 
-  }
-  public void ExcluirCompromisso()
-  {
-    
     ListarCompromissos();
 
-     string caminho = Path.Combine("Dados", "compromissos.json");
-     List<Compromisso> compromissos = JsonPersistencia.Carregar<Compromisso>(caminho);
-    
-     if (compromissos == null || compromissos.Count == 0)
+    string caminho = Path.Combine("Dados", "compromissos.json");
+    List<Compromisso> compromissos = JsonPersistencia.Carregar<Compromisso>(caminho);
+
+    Console.Write("\nDigite o número do compromisso que deseja editar: ");
+    int indice = int.Parse(Console.ReadLine()!) - 1;
+    if (indice < 0 || indice >= compromissos.Count)
     {
-        Console.WriteLine("Não há compromissos para excluir.");
-        return;
+      Console.WriteLine("Índice inválido.");
+      return;
     }
 
-     Console.Write("Digite o número do compromisso que deseja excluir: ");
-        int indice = int.Parse(Console.ReadLine()!) - 1;
-        if (indice < 0 || indice >= compromissos.Count)
+    Compromisso compromisso = compromissos[indice];
+
+    while (true)
+    {
+      Console.WriteLine("\nO que deseja editar:");
+      Console.WriteLine("1 - Data");
+      Console.WriteLine("2 - Hora");
+      Console.WriteLine("3 - Local");
+      Console.WriteLine("4 - Descrição");
+      //Console.WriteLine("\n5 - Participantes");
+      //Console.WriteLine("\n6 - Anotações");
+      Console.WriteLine("0 - Sair");
+
+      string opcao = string.Empty;
+
+      while (string.IsNullOrWhiteSpace(opcao))
+      {
+        Console.Write("\nDigite a Opção: ");
+        opcao = Console.ReadLine() ?? string.Empty;
+
+        if (string.IsNullOrWhiteSpace(opcao))
         {
-            Console.WriteLine("Índice inválido.");
-            return;
+          Console.WriteLine("A opção deve estar preenchida.");
         }
-        compromissos.RemoveAt(indice);
-        Console.WriteLine("Compromisso removido.");
+      }
+
+
+      if (opcao == "0")
+      {
         JsonPersistencia.Salvar(compromissos, caminho);
+        Console.WriteLine("Alterações salvas. Saindo...");
+        return;
+      }
+      else if (opcao == "1")
+      {
+        EditarData(compromisso);
+      }
+      else if (opcao == "2")
+      {
+        EditarHora(compromisso);
+      }
+      else if (opcao == "3")
+      {
+        EditarLocal(compromisso);
+      }
+      else if (opcao == "4")
+      {
+        EditarDescricao(compromisso);
+      }
+      else if (opcao == "5")
+      {
+       // EditarParticipantes(compromisso);
+      }
+      else if (opcao == "6")
+      {
+        //EditarAnotacoes(compromisso);
+      }
+      else
+      {
+        Console.WriteLine("Opção inválida.");
+      }
+
+    }
   }
+
+  public void ExcluirCompromisso()
+  {
+
+    ListarCompromissos();
+
+    string caminho = Path.Combine("Dados", "compromissos.json");
+    List<Compromisso> compromissos = JsonPersistencia.Carregar<Compromisso>(caminho);
+
+    if (compromissos == null || compromissos.Count == 0)
+    {
+      Console.WriteLine("Não há compromissos para excluir.");
+      return;
+    }
+
+    Console.Write("\nDigite o número do compromisso que deseja excluir: ");
+    int indice = int.Parse(Console.ReadLine()!) - 1;
+    if (indice < 0 || indice >= compromissos.Count)
+    {
+      Console.WriteLine("Índice inválido.");
+      return;
+    }
+    compromissos.RemoveAt(indice);
+    Console.WriteLine("Compromisso removido.");
+    JsonPersistencia.Salvar(compromissos, caminho);
+  }
+
+
+  private void EditarData(Compromisso compromisso)
+  {
+    DateTime data;
+
+    while (true)
+    {
+      Console.WriteLine("Informe a nova data do compromisso (dd/MM/yyyy):");
+      string dataNova = Console.ReadLine() ?? string.Empty;
+
+      if (string.IsNullOrWhiteSpace(dataNova))
+      {
+        Console.WriteLine("A data deve ser preenchida.");
+        continue;
+      }
+
+      bool valido = DateTime.TryParseExact(
+                  dataNova,
+                  "dd/MM/yyyy",
+                  culturaBrasileira,
+                  DateTimeStyles.None,
+                  out data);
+
+      if (!valido)
+      {
+        Console.WriteLine("Formato inválido. Use o formato dd/MM/yyyy.\n");
+        continue;
+      }
+
+      DateTime dataAtual = DateTime.Today.AddDays(1);
+
+      if (data < dataAtual)
+     {
+       Console.WriteLine($"A data {data.ToString("dd/MM/yyyy")} precisa ser no mínimo {dataAtual.ToString("dd/MM/yyyy")}");
+       continue;
+     }
+
+      compromisso.Data = data;
+      break;
+    }
+  }
+  
+  private void EditarHora(Compromisso compromisso)
+  {
+    TimeSpan hora;
+
+      while (true)
+      {
+        Console.WriteLine("Informe a nova hora do compromisso (HH:mm):");
+        string horaNova = Console.ReadLine() ?? string.Empty;
+
+        if (string.IsNullOrWhiteSpace(horaNova))
+        {
+          Console.WriteLine("A hora deve ser preenchida.");
+          continue;
+        }
+
+        bool valido = TimeSpan.TryParseExact(
+                    horaNova,
+                    "hh\\:mm",
+                    culturaBrasileira,
+                    TimeSpanStyles.None,
+                    out hora);
+
+        if (!valido)
+        {
+          Console.WriteLine("Formato inválido. Use o formato HH:mm.\n");
+          continue;
+        }
+
+        compromisso.Hora = hora;
+        break;
+      }
+  }
+  private void EditarLocal(Compromisso compromisso)
+  {
+
+     Local local;
+     string nomelocalNovo;
+     int capacidadeNova;
+
+     while (true)
+      {
+        Console.WriteLine("Informe o nome do novo local do compromisso:");
+        nomelocalNovo = Console.ReadLine() ?? string.Empty;
+
+        if (string.IsNullOrWhiteSpace(nomelocalNovo))
+        {
+          Console.WriteLine("O nome do local deve ser preenchido.");
+        }
+        else
+        {
+          break;
+        }
+      }
+
+      while (true)
+      {
+        Console.WriteLine("Informe a capacidade do novo local:");
+        string entradaCompromisso = Console.ReadLine() ?? string.Empty;
+
+         if (string.IsNullOrWhiteSpace(entradaCompromisso))
+        {
+            Console.WriteLine("A capacidade deve ser preenchida.");
+            continue;
+        }
+
+        if (!int.TryParse(entradaCompromisso, out capacidadeNova))
+        {
+            Console.WriteLine("O valor deve ser um número.");
+            continue;
+        }
+
+        if (capacidadeNova < 1)
+        {
+            Console.WriteLine("A capacidade deve ser de no mínimo 1.");
+            continue;
+        }
+       
+        break;
+      }
+
+      local = new Local(nomelocalNovo, capacidadeNova);
+      compromisso.Local = local;
+      Console.WriteLine("Local atualizado.");
+  }
+
+  private void EditarDescricao(Compromisso compromisso)
+  {
+    string descricao;
+
+      while (true)
+      {
+        Console.WriteLine("Informe a nova descrição do compromisso:");
+        descricao = Console.ReadLine() ?? string.Empty;
+
+        if (string.IsNullOrWhiteSpace(descricao))
+        {
+          Console.WriteLine("A descrição deve ser preenchida.");
+        }
+        else
+        {
+          break;
+        }
+      }
+      compromisso.Descricao = descricao;
+      Console.WriteLine("Descrição atualizada");
+  }
+
 }
+  

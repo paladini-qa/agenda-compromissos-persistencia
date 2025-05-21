@@ -55,7 +55,7 @@
     },
     {
       "$id": "13",
-      "Data": "2025-05-30T00:00:00",
+      "Data": "2028-05-31T00:00:00",
       "Hora": "12:00:00",
       "Descricao": "Almoco",
       "Usuario": {
@@ -93,79 +93,6 @@
       },
       "ErrosDeValidacao": {
         "$id": "21",
-        "$values": []
-      }
-    },
-    {
-      "$id": "22",
-      "Data": "2026-07-20T00:00:00",
-      "Hora": "20:00:00",
-      "Descricao": "jantar",
-      "Usuario": {
-        "$id": "23",
-        "Nome": "Pedro",
-        "Compromissos": {
-          "$id": "24",
-          "$values": [
-            {
-              "$id": "25",
-              "Data": "2025-05-30T00:00:00",
-              "Hora": "12:00:00",
-              "Descricao": "Almoco",
-              "Usuario": {
-                "$ref": "23"
-              },
-              "Local": {
-                "$id": "26",
-                "Nome": "Matelandia",
-                "Capacidade": 2,
-                "ErrosDeValidacao": {
-                  "$id": "27",
-                  "$values": []
-                }
-              },
-              "Participantes": {
-                "$id": "28",
-                "$values": []
-              },
-              "Anotacoes": {
-                "$id": "29",
-                "$values": []
-              },
-              "ErrosDeValidacao": {
-                "$id": "30",
-                "$values": []
-              }
-            },
-            {
-              "$ref": "22"
-            }
-          ]
-        },
-        "ErrosDeValidacao": {
-          "$id": "31",
-          "$values": []
-        }
-      },
-      "Local": {
-        "$id": "32",
-        "Nome": "rafain",
-        "Capacidade": 2,
-        "ErrosDeValidacao": {
-          "$id": "33",
-          "$values": []
-        }
-      },
-      "Participantes": {
-        "$id": "34",
-        "$values": []
-      },
-      "Anotacoes": {
-        "$id": "35",
-        "$values": []
-      },
-      "ErrosDeValidacao": {
-        "$id": "36",
         "$values": []
       }
     }

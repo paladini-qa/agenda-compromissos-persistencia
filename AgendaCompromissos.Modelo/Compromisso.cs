@@ -45,7 +45,6 @@ public class Compromisso
             ErrosDeValidacao.Add($"A data {data.ToString("dd/MM/yyyy")} precisa ser no mínimo {dataAtual.ToString("dd/MM/yyyy")}");
         }
 
-
         return ErrosDeValidacao.Count == 0;
 
     }
