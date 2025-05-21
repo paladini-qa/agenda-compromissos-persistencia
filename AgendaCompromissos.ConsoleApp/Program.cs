@@ -43,6 +43,4 @@ while (true)
             Console.WriteLine("Opção inválida.");
             break;
     }
-    Console.WriteLine("\nPressione qualquer tecla para continuar...");
-    Console.ReadKey();
 }

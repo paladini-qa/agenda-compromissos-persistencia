@@ -256,7 +256,7 @@ public class Gerenciador
       Console.WriteLine("Nenhum compromisso cadastrado.");
       return;
     }
-
+    Console.Clear();
     Console.WriteLine("\n===== Lista de Compromissos =====");
 
     for (int i = 0; i < quantidadeCompromisso; i++)
@@ -328,8 +328,8 @@ public class Gerenciador
       Console.WriteLine("2 - Hora");
       Console.WriteLine("3 - Local");
       Console.WriteLine("4 - Descrição");
-      Console.WriteLine("\n5 - Participantes");
-      Console.WriteLine("\n6 - Anotações");
+      Console.WriteLine("5 - Participantes");
+      Console.WriteLine("6 - Anotações");
       Console.WriteLine("0 - Sair");
 
       string opcao = string.Empty;
@@ -345,42 +345,33 @@ public class Gerenciador
         }
       }
 
-
-      if (opcao == "0")
+      switch (opcao)
       {
-        JsonPersistencia.Salvar(compromissos, caminho);
-        Console.WriteLine("Alterações salvas. Saindo...");
-        return;
+        case "0":
+          Console.WriteLine("Saindo...");
+          return;
+        case "1":
+          EditarData(compromisso);
+          break;
+        case "2":
+          EditarHora(compromisso);
+          break;
+        case "3":
+          EditarLocal(compromisso);
+          break;
+        case "4":
+          EditarDescricao(compromisso);
+          break;
+        case "5":
+          EditarParticipantes(compromisso);
+          break;
+        case "6":
+          EditarAnotacoes(compromisso);
+          break;
+        default:
+          Console.WriteLine("Opção inválida.");
+          continue;
       }
-      else if (opcao == "1")
-      {
-        EditarData(compromisso);
-      }
-      else if (opcao == "2")
-      {
-        EditarHora(compromisso);
-      }
-      else if (opcao == "3")
-      {
-        EditarLocal(compromisso);
-      }
-      else if (opcao == "4")
-      {
-        EditarDescricao(compromisso);
-      }
-      else if (opcao == "5")
-      {
-        EditarParticipantes(compromisso);
-      }
-      else if (opcao == "6")
-      {
-        EditarAnotacoes(compromisso);
-      }
-      else
-      {
-        Console.WriteLine("Opção inválida.");
-      }
-
     }
   }
 
