@@ -551,131 +551,219 @@ public class Gerenciador
   }
   private void EditarParticipantes(Compromisso compromisso)
   {
-    Console.WriteLine("Deseja adicionar ou remover um participante? (a/r/n)");
-    string resposta = Console.ReadLine()?.ToLower() ?? "n";
-
-    if (resposta == "a")
+    while (true)
     {
-      Console.WriteLine("Informe o nome do participante:");
-      string nomeParticipante = Console.ReadLine() ?? string.Empty;
-
-      Participante participante = new Participante { Nome = nomeParticipante };
-      try
+      Console.Clear();
+      Console.WriteLine("=== Participantes do Compromisso ===");
+      if (compromisso.Participantes.Count == 0)
       {
-        compromisso.AdicionarParticipante(participante);
-        Console.WriteLine("Participante adicionado.");
-      }
-      catch (ArgumentException ex)
-      {
-        Console.WriteLine($"Erro ao adicionar participante: {ex.Message}");
-      }
-    }
-    else if (resposta == "r")
-    {
-      Console.WriteLine("Informe o nome do participante a ser removido:");
-      string nomeParticipante = Console.ReadLine() ?? string.Empty;
-
-      try
-      {
-        Participante? participante = compromisso.Participantes.FirstOrDefault(p => p.Nome == nomeParticipante);
-        if (participante != null)
-        {
-          compromisso.RemoverParticipante(participante);
-          Console.WriteLine("Participante removido.");
-        }
-        else
-        {
-          Console.WriteLine("Participante não encontrado.");
-        }
-      }
-      catch (ArgumentException ex)
-      {
-        Console.WriteLine($"Erro ao remover participante: {ex.Message}");
-      }
-    }
-    else if (resposta == "n")
-    {
-      Console.WriteLine("Deseja editar o nome de um participante? (s/n)");
-      string respostaNome = Console.ReadLine()?.ToLower() ?? "n";
-      if (respostaNome == "s")
-      {
-        Console.WriteLine("Informe o nome do participante a ser editado:");
-        string nomeParticipante = Console.ReadLine() ?? string.Empty;
-
-        Participante? participante = compromisso.Participantes.FirstOrDefault(p => p.Nome == nomeParticipante);
-
-        if (participante != null)
-        {
-          Console.WriteLine("Informe o novo nome do participante:");
-          string novoNome = Console.ReadLine() ?? string.Empty;
-          participante.Nome = novoNome;
-          Console.WriteLine("Nome atualizado.");
-        }
-        else
-        {
-          Console.WriteLine("Participante não encontrado.");
-        }
-      }
-      else if (respostaNome == "n")
-      {
-        Console.WriteLine("Nenhuma alteração feita.");
+        Console.WriteLine("Nenhum participante cadastrado.");
       }
       else
       {
-        Console.WriteLine("Resposta inválida.");
+        for (int i = 0; i < compromisso.Participantes.Count; i++)
+        {
+          Console.WriteLine($"{i + 1}. {compromisso.Participantes[i].Nome}");
+        }
       }
-    }
-    else
-    {
-      Console.WriteLine("Resposta inválida.");
+      Console.WriteLine("\nO que deseja fazer?");
+      Console.WriteLine("1 - Adicionar participante");
+      Console.WriteLine("2 - Remover participante");
+      Console.WriteLine("3 - Editar nome de participante");
+      Console.WriteLine("0 - Voltar");
+
+      Console.Write("\nEscolha uma opção: ");
+      string opcao = Console.ReadLine() ?? "";
+
+      switch (opcao)
+      {
+        case "0":
+          return;
+        case "1":
+          Console.Write("Informe o nome do novo participante: ");
+          string nomeAdicionar = Console.ReadLine() ?? string.Empty;
+          if (string.IsNullOrWhiteSpace(nomeAdicionar))
+          {
+            Console.WriteLine("Nome não pode ser vazio.");
+            Console.ReadKey();
+            break;
+          }
+          try
+          {
+            compromisso.AdicionarParticipante(new Participante { Nome = nomeAdicionar });
+            Console.WriteLine("Participante adicionado.");
+          }
+          catch (ArgumentException ex)
+          {
+            Console.WriteLine($"Erro ao adicionar participante: {ex.Message}");
+          }
+          Console.ReadKey();
+          break;
+        case "2":
+          if (compromisso.Participantes.Count == 0)
+          {
+            Console.WriteLine("Nenhum participante para remover.");
+            Console.ReadKey();
+            break;
+          }
+          Console.Write("Digite o número do participante para remover: ");
+          if (int.TryParse(Console.ReadLine(), out int indiceRemover) &&
+              indiceRemover > 0 && indiceRemover <= compromisso.Participantes.Count)
+          {
+            var participanteRemover = compromisso.Participantes[indiceRemover - 1];
+            compromisso.RemoverParticipante(participanteRemover);
+            Console.WriteLine("Participante removido.");
+          }
+          else
+          {
+            Console.WriteLine("Índice inválido.");
+          }
+          Console.ReadKey();
+          break;
+        case "3":
+          if (compromisso.Participantes.Count == 0)
+          {
+            Console.WriteLine("Nenhum participante para editar.");
+            Console.ReadKey();
+            break;
+          }
+          Console.Write("Digite o número do participante para editar: ");
+          if (int.TryParse(Console.ReadLine(), out int indiceEditar) &&
+              indiceEditar > 0 && indiceEditar <= compromisso.Participantes.Count)
+          {
+            var participanteEditar = compromisso.Participantes[indiceEditar - 1];
+            Console.Write($"Nome atual: {participanteEditar.Nome}\nNovo nome: ");
+            string novoNome = Console.ReadLine() ?? string.Empty;
+            if (!string.IsNullOrWhiteSpace(novoNome))
+            {
+              participanteEditar.Nome = novoNome;
+              Console.WriteLine("Nome atualizado.");
+            }
+            else
+            {
+              Console.WriteLine("Nome não pode ser vazio.");
+            }
+          }
+          else
+          {
+            Console.WriteLine("Índice inválido.");
+          }
+          Console.ReadKey();
+          break;
+        default:
+          Console.WriteLine("Opção inválida.");
+          Console.ReadKey();
+          break;
+      }
     }
   }
+
   private void EditarAnotacoes(Compromisso compromisso)
   {
-    Console.WriteLine("Deseja adicionar ou remover uma anotação? (a/r/n)");
-    string resposta = Console.ReadLine()?.ToLower() ?? "n";
-
-    if (resposta == "a")
+    while (true)
     {
-      Console.WriteLine("Informe a anotação:");
-      string anotacao = Console.ReadLine() ?? string.Empty;
-
-      try
+      Console.Clear();
+      Console.WriteLine("=== Anotações do Compromisso ===");
+      if (compromisso.Anotacoes.Count == 0)
       {
-        compromisso.AdicionarAnotacao(anotacao);
-        Console.WriteLine("Anotação adicionada.");
+        Console.WriteLine("Nenhuma anotação cadastrada.");
       }
-      catch (ArgumentException ex)
+      else
       {
-        Console.WriteLine($"Erro ao adicionar anotação: {ex.Message}");
-      }
-    }
-    else if (resposta == "r")
-    {
-      Console.WriteLine("Informe o texto da anotação a ser removida:");
-      string textoAnotacao = Console.ReadLine() ?? string.Empty;
-
-      try
-      {
-        Anotacao? anotacao = compromisso.Anotacoes.FirstOrDefault(a => a.Texto == textoAnotacao);
-        if (anotacao != null)
+        for (int i = 0; i < compromisso.Anotacoes.Count; i++)
         {
-          compromisso.RemoverAnotacao(anotacao);
-          Console.WriteLine("Anotação removida.");
-        }
-        else
-        {
-          Console.WriteLine("Anotação não encontrada.");
+          Console.WriteLine($"{i + 1}. {compromisso.Anotacoes[i]}");
         }
       }
-      catch (ArgumentException ex)
+      Console.WriteLine("\nO que deseja fazer?");
+      Console.WriteLine("1 - Adicionar anotação");
+      Console.WriteLine("2 - Remover anotação");
+      Console.WriteLine("3 - Editar anotação");
+      Console.WriteLine("0 - Voltar");
+
+      Console.Write("\nEscolha uma opção: ");
+      string opcao = Console.ReadLine() ?? "";
+
+      switch (opcao)
       {
-        Console.WriteLine($"Erro ao remover anotação: {ex.Message}");
+        case "0":
+          return;
+        case "1":
+          Console.Write("Informe a nova anotação: ");
+          string textoAdicionar = Console.ReadLine() ?? string.Empty;
+          if (string.IsNullOrWhiteSpace(textoAdicionar))
+          {
+            Console.WriteLine("Anotação não pode ser vazia.");
+            Console.ReadKey();
+            break;
+          }
+          try
+          {
+            compromisso.AdicionarAnotacao(textoAdicionar);
+            Console.WriteLine("Anotação adicionada.");
+          }
+          catch (ArgumentException ex)
+          {
+            Console.WriteLine($"Erro ao adicionar anotação: {ex.Message}");
+          }
+          Console.ReadKey();
+          break;
+        case "2":
+          if (compromisso.Anotacoes.Count == 0)
+          {
+            Console.WriteLine("Nenhuma anotação para remover.");
+            Console.ReadKey();
+            break;
+          }
+          Console.Write("Digite o número da anotação para remover: ");
+          if (int.TryParse(Console.ReadLine(), out int indiceRemover) &&
+              indiceRemover > 0 && indiceRemover <= compromisso.Anotacoes.Count)
+          {
+            var anotacaoRemover = compromisso.Anotacoes[indiceRemover - 1];
+            compromisso.RemoverAnotacao(anotacaoRemover);
+            Console.WriteLine("Anotação removida.");
+          }
+          else
+          {
+            Console.WriteLine("Índice inválido.");
+          }
+          Console.ReadKey();
+          break;
+        case "3":
+          if (compromisso.Anotacoes.Count == 0)
+          {
+            Console.WriteLine("Nenhuma anotação para editar.");
+            Console.ReadKey();
+            break;
+          }
+          Console.Write("Digite o número da anotação para editar: ");
+          if (int.TryParse(Console.ReadLine(), out int indiceEditar) &&
+              indiceEditar > 0 && indiceEditar <= compromisso.Anotacoes.Count)
+          {
+            var anotacaoEditar = compromisso.Anotacoes[indiceEditar - 1];
+            Console.Write($"Texto atual: {anotacaoEditar}\nNovo texto: ");
+            string novoTexto = Console.ReadLine() ?? string.Empty;
+            if (!string.IsNullOrWhiteSpace(novoTexto))
+            {
+              anotacaoEditar.Texto = novoTexto;
+              Console.WriteLine("Anotação atualizada.");
+            }
+            else
+            {
+              Console.WriteLine("Anotação não pode ser vazia.");
+            }
+          }
+          else
+          {
+            Console.WriteLine("Índice inválido.");
+          }
+          Console.ReadKey();
+          break;
+        default:
+          Console.WriteLine("Opção inválida.");
+          Console.ReadKey();
+          break;
       }
-    }
-    else
-    {
-      Console.WriteLine("Nenhuma alteração feita.");
     }
   }
 
