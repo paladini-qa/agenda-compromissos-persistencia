@@ -328,8 +328,8 @@ public class Gerenciador
       Console.WriteLine("2 - Hora");
       Console.WriteLine("3 - Local");
       Console.WriteLine("4 - Descrição");
-      //Console.WriteLine("\n5 - Participantes");
-      //Console.WriteLine("\n6 - Anotações");
+      Console.WriteLine("\n5 - Participantes");
+      Console.WriteLine("\n6 - Anotações");
       Console.WriteLine("0 - Sair");
 
       string opcao = string.Empty;
@@ -370,7 +370,7 @@ public class Gerenciador
       }
       else if (opcao == "5")
       {
-       // EditarParticipantes(compromisso);
+        EditarParticipantes(compromisso);
       }
       else if (opcao == "6")
       {
@@ -442,122 +442,202 @@ public class Gerenciador
       DateTime dataAtual = DateTime.Today.AddDays(1);
 
       if (data < dataAtual)
-     {
-       Console.WriteLine($"A data {data.ToString("dd/MM/yyyy")} precisa ser no mínimo {dataAtual.ToString("dd/MM/yyyy")}");
-       continue;
-     }
+      {
+        Console.WriteLine($"A data {data.ToString("dd/MM/yyyy")} precisa ser no mínimo {dataAtual.ToString("dd/MM/yyyy")}");
+        continue;
+      }
 
       compromisso.Data = data;
       break;
     }
   }
-  
+
   private void EditarHora(Compromisso compromisso)
   {
     TimeSpan hora;
 
-      while (true)
+    while (true)
+    {
+      Console.WriteLine("Informe a nova hora do compromisso (HH:mm):");
+      string horaNova = Console.ReadLine() ?? string.Empty;
+
+      if (string.IsNullOrWhiteSpace(horaNova))
       {
-        Console.WriteLine("Informe a nova hora do compromisso (HH:mm):");
-        string horaNova = Console.ReadLine() ?? string.Empty;
-
-        if (string.IsNullOrWhiteSpace(horaNova))
-        {
-          Console.WriteLine("A hora deve ser preenchida.");
-          continue;
-        }
-
-        bool valido = TimeSpan.TryParseExact(
-                    horaNova,
-                    "hh\\:mm",
-                    culturaBrasileira,
-                    TimeSpanStyles.None,
-                    out hora);
-
-        if (!valido)
-        {
-          Console.WriteLine("Formato inválido. Use o formato HH:mm.\n");
-          continue;
-        }
-
-        compromisso.Hora = hora;
-        break;
+        Console.WriteLine("A hora deve ser preenchida.");
+        continue;
       }
+
+      bool valido = TimeSpan.TryParseExact(
+                  horaNova,
+                  "hh\\:mm",
+                  culturaBrasileira,
+                  TimeSpanStyles.None,
+                  out hora);
+
+      if (!valido)
+      {
+        Console.WriteLine("Formato inválido. Use o formato HH:mm.\n");
+        continue;
+      }
+
+      compromisso.Hora = hora;
+      break;
+    }
   }
   private void EditarLocal(Compromisso compromisso)
   {
 
-     Local local;
-     string nomelocalNovo;
-     int capacidadeNova;
+    Local local;
+    string nomelocalNovo;
+    int capacidadeNova;
 
-     while (true)
+    while (true)
+    {
+      Console.WriteLine("Informe o nome do novo local do compromisso:");
+      nomelocalNovo = Console.ReadLine() ?? string.Empty;
+
+      if (string.IsNullOrWhiteSpace(nomelocalNovo))
       {
-        Console.WriteLine("Informe o nome do novo local do compromisso:");
-        nomelocalNovo = Console.ReadLine() ?? string.Empty;
-
-        if (string.IsNullOrWhiteSpace(nomelocalNovo))
-        {
-          Console.WriteLine("O nome do local deve ser preenchido.");
-        }
-        else
-        {
-          break;
-        }
+        Console.WriteLine("O nome do local deve ser preenchido.");
       }
-
-      while (true)
+      else
       {
-        Console.WriteLine("Informe a capacidade do novo local:");
-        string entradaCompromisso = Console.ReadLine() ?? string.Empty;
-
-         if (string.IsNullOrWhiteSpace(entradaCompromisso))
-        {
-            Console.WriteLine("A capacidade deve ser preenchida.");
-            continue;
-        }
-
-        if (!int.TryParse(entradaCompromisso, out capacidadeNova))
-        {
-            Console.WriteLine("O valor deve ser um número.");
-            continue;
-        }
-
-        if (capacidadeNova < 1)
-        {
-            Console.WriteLine("A capacidade deve ser de no mínimo 1.");
-            continue;
-        }
-       
         break;
       }
+    }
 
-      local = new Local(nomelocalNovo, capacidadeNova);
-      compromisso.Local = local;
-      Console.WriteLine("Local atualizado.");
+    while (true)
+    {
+      Console.WriteLine("Informe a capacidade do novo local:");
+      string entradaCompromisso = Console.ReadLine() ?? string.Empty;
+
+      if (string.IsNullOrWhiteSpace(entradaCompromisso))
+      {
+        Console.WriteLine("A capacidade deve ser preenchida.");
+        continue;
+      }
+
+      if (!int.TryParse(entradaCompromisso, out capacidadeNova))
+      {
+        Console.WriteLine("O valor deve ser um número.");
+        continue;
+      }
+
+      if (capacidadeNova < 1)
+      {
+        Console.WriteLine("A capacidade deve ser de no mínimo 1.");
+        continue;
+      }
+
+      break;
+    }
+
+    local = new Local(nomelocalNovo, capacidadeNova);
+    compromisso.Local = local;
+    Console.WriteLine("Local atualizado.");
   }
 
   private void EditarDescricao(Compromisso compromisso)
   {
     string descricao;
 
-      while (true)
-      {
-        Console.WriteLine("Informe a nova descrição do compromisso:");
-        descricao = Console.ReadLine() ?? string.Empty;
+    while (true)
+    {
+      Console.WriteLine("Informe a nova descrição do compromisso:");
+      descricao = Console.ReadLine() ?? string.Empty;
 
-        if (string.IsNullOrWhiteSpace(descricao))
+      if (string.IsNullOrWhiteSpace(descricao))
+      {
+        Console.WriteLine("A descrição deve ser preenchida.");
+      }
+      else
+      {
+        break;
+      }
+    }
+    compromisso.Descricao = descricao;
+    Console.WriteLine("Descrição atualizada");
+  }
+  private void EditarParticipantes(Compromisso compromisso)
+  {
+    Console.WriteLine("Deseja adicionar ou remover um participante? (a/r/n)");
+    string resposta = Console.ReadLine()?.ToLower() ?? "n";
+
+    if (resposta == "a")
+    {
+      Console.WriteLine("Informe o nome do participante:");
+      string nomeParticipante = Console.ReadLine() ?? string.Empty;
+
+      Participante participante = new Participante { Nome = nomeParticipante };
+      try
+      {
+        compromisso.AdicionarParticipante(participante);
+        Console.WriteLine("Participante adicionado.");
+      }
+      catch (ArgumentException ex)
+      {
+        Console.WriteLine($"Erro ao adicionar participante: {ex.Message}");
+      }
+    }
+    else if (resposta == "r")
+    {
+      Console.WriteLine("Informe o nome do participante a ser removido:");
+      string nomeParticipante = Console.ReadLine() ?? string.Empty;
+
+      try
+      {
+        Participante? participante = compromisso.Participantes.FirstOrDefault(p => p.Nome == nomeParticipante);
+        if (participante != null)
         {
-          Console.WriteLine("A descrição deve ser preenchida.");
+          compromisso.RemoverParticipante(participante);
+          Console.WriteLine("Participante removido.");
         }
         else
         {
-          break;
+          Console.WriteLine("Participante não encontrado.");
         }
       }
-      compromisso.Descricao = descricao;
-      Console.WriteLine("Descrição atualizada");
+      catch (ArgumentException ex)
+      {
+        Console.WriteLine($"Erro ao remover participante: {ex.Message}");
+      }
+    }
+    else if (resposta == "n")
+    {
+      Console.WriteLine("Deseja editar o nome de um participante? (s/n)");
+      string respostaNome = Console.ReadLine()?.ToLower() ?? "n";
+      if (respostaNome == "s")
+      {
+        Console.WriteLine("Informe o nome do participante a ser editado:");
+        string nomeParticipante = Console.ReadLine() ?? string.Empty;
+
+        Participante? participante = compromisso.Participantes.FirstOrDefault(p => p.Nome == nomeParticipante);
+
+        if (participante != null)
+        {
+          Console.WriteLine("Informe o novo nome do participante:");
+          string novoNome = Console.ReadLine() ?? string.Empty;
+          participante.Nome = novoNome;
+          Console.WriteLine("Nome atualizado.");
+        }
+        else
+        {
+          Console.WriteLine("Participante não encontrado.");
+        }
+      }
+      else if (respostaNome == "n")
+      {
+        Console.WriteLine("Nenhuma alteração feita.");
+      }
+      else
+      {
+        Console.WriteLine("Resposta inválida.");
+      }
+    }
+    else
+    {
+      Console.WriteLine("Resposta inválida.");
+    }
   }
 
 }
-  

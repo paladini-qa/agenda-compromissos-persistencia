@@ -8,12 +8,12 @@ public class Compromisso
     public TimeSpan Hora { get; set; }
     public string? Descricao { get; set; }
     public Usuario? Usuario { get; set; } // ASSOCIAÇÃO SIMPLES
-    public Local? Local { get; set;  } // ASSOCIAÇÃO SIMPLES
-    public List<Participante> Participantes { get; set;  } = new(); // ASSOCIAÇÃO N:N
-    public List<Anotacao> Anotacoes { get; set;  } = new(); // COMPOSIÇÃO
-    public List<string> ErrosDeValidacao { get; set;  } = new();
+    public Local? Local { get; set; } // ASSOCIAÇÃO SIMPLES
+    public List<Participante> Participantes { get; set; } = new(); // ASSOCIAÇÃO N:N
+    public List<Anotacao> Anotacoes { get; set; } = new(); // COMPOSIÇÃO
+    public List<string> ErrosDeValidacao { get; set; } = new();
 
-    public Compromisso () {}
+    public Compromisso() { }
 
     public Compromisso(
         DateTime data,
@@ -74,6 +74,11 @@ public class Compromisso
             throw new ArgumentException("A anotação precisa estar preenchida.");
         }
         Anotacoes.Add(new Anotacao(texto));
+    }
+
+    public void RemoverParticipante(Participante participante)
+    {
+        Participantes.Remove(participante);
     }
 
     //public override string ToString()
