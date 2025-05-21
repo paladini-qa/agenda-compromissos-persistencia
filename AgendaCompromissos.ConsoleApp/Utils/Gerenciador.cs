@@ -323,7 +323,6 @@ public class Gerenciador
 
     while (true)
     {
-      Console.Clear();
       Console.WriteLine("\n===== Compromisso Selecionado =====");
       Console.WriteLine($"[{indice + 1}] {compromisso.Descricao}");
       Console.WriteLine($"Data: {compromisso.Data:dd/MM/yyyy}");
@@ -443,7 +442,8 @@ public class Gerenciador
 
     while (true)
     {
-      Console.WriteLine("Informe a nova data do compromisso (dd/MM/yyyy):");
+      Console.WriteLine($"\nData atual: {compromisso.Data:dd/MM/yyyy}");
+      Console.WriteLine("\nInforme a nova data do compromisso (dd/MM/yyyy):");
       string dataNova = Console.ReadLine() ?? string.Empty;
 
       if (string.IsNullOrWhiteSpace(dataNova))
@@ -484,7 +484,8 @@ public class Gerenciador
 
     while (true)
     {
-      Console.WriteLine("Informe a nova hora do compromisso (HH:mm):");
+      Console.WriteLine($"\nHora atual: {compromisso.Hora:hh\\:mm}");
+      Console.WriteLine("\nInforme a nova hora do compromisso (HH:mm):");
       string horaNova = Console.ReadLine() ?? string.Empty;
 
       if (string.IsNullOrWhiteSpace(horaNova))
@@ -519,7 +520,8 @@ public class Gerenciador
 
     while (true)
     {
-      Console.WriteLine("Informe o nome do novo local do compromisso:");
+      Console.WriteLine($"\nLocal atual: {compromisso.Local?.Nome}");
+      Console.WriteLine("\nInforme o nome do novo local do compromisso:");
       nomelocalNovo = Console.ReadLine() ?? string.Empty;
 
       if (string.IsNullOrWhiteSpace(nomelocalNovo))
@@ -569,7 +571,8 @@ public class Gerenciador
 
     while (true)
     {
-      Console.WriteLine("Informe a nova descrição do compromisso:");
+      Console.WriteLine($"\nDescrição atual: {compromisso.Descricao}");
+      Console.WriteLine("\nInforme a nova descrição do compromisso:");
       descricao = Console.ReadLine() ?? string.Empty;
 
       if (string.IsNullOrWhiteSpace(descricao))
@@ -588,7 +591,7 @@ public class Gerenciador
   {
     while (true)
     {
-      Console.WriteLine("=== Participantes do Compromisso ===");
+      Console.WriteLine("\n=== Participantes do Compromisso ===");
       if (compromisso.Participantes.Count == 0)
       {
         Console.WriteLine("Nenhum participante cadastrado.");
@@ -696,7 +699,7 @@ public class Gerenciador
   {
     while (true)
     {
-      Console.WriteLine("=== Anotações do Compromisso ===");
+      Console.WriteLine("\n=== Anotações do Compromisso ===");
       if (compromisso.Anotacoes.Count == 0)
       {
         Console.WriteLine("Nenhuma anotação cadastrada.");
