@@ -382,6 +382,7 @@ public class Gerenciador
       switch (opcao)
       {
         case "0":
+          JsonPersistencia.Salvar(compromissos, caminho);
           Console.WriteLine("Saindo...");
           return;
         case "1":
@@ -622,17 +623,21 @@ public class Gerenciador
           if (string.IsNullOrWhiteSpace(nomeAdicionar))
           {
             Console.WriteLine("Nome não pode ser vazio.");
+            Console.WriteLine("\nPressione qualquer tecla para continuar...");
             Console.ReadKey();
             break;
           }
           try
           {
             compromisso.AdicionarParticipante(new Participante { Nome = nomeAdicionar });
+
             Console.WriteLine("Participante adicionado.");
+            Console.WriteLine("\nPressione qualquer tecla para continuar...");
           }
           catch (ArgumentException ex)
           {
             Console.WriteLine($"Erro ao adicionar participante: {ex.Message}");
+            Console.WriteLine("\nPressione qualquer tecla para continuar...");
           }
           Console.ReadKey();
           break;
@@ -640,6 +645,7 @@ public class Gerenciador
           if (compromisso.Participantes.Count == 0)
           {
             Console.WriteLine("Nenhum participante para remover.");
+            Console.WriteLine("\nPressione qualquer tecla para continuar...");
             Console.ReadKey();
             break;
           }
@@ -650,10 +656,12 @@ public class Gerenciador
             var participanteRemover = compromisso.Participantes[indiceRemover - 1];
             compromisso.RemoverParticipante(participanteRemover);
             Console.WriteLine("Participante removido.");
+            Console.WriteLine("\nPressione qualquer tecla para continuar...");
           }
           else
           {
             Console.WriteLine("Índice inválido.");
+            Console.WriteLine("\nPressione qualquer tecla para continuar...");
           }
           Console.ReadKey();
           break;
@@ -661,6 +669,7 @@ public class Gerenciador
           if (compromisso.Participantes.Count == 0)
           {
             Console.WriteLine("Nenhum participante para editar.");
+            Console.WriteLine("\nPressione qualquer tecla para continuar...");
             Console.ReadKey();
             break;
           }
@@ -675,15 +684,18 @@ public class Gerenciador
             {
               participanteEditar.Nome = novoNome;
               Console.WriteLine("Nome atualizado.");
+              Console.WriteLine("\nPressione qualquer tecla para continuar...");
             }
             else
             {
               Console.WriteLine("Nome não pode ser vazio.");
+              Console.WriteLine("\nPressione qualquer tecla para continuar...");
             }
           }
           else
           {
             Console.WriteLine("Índice inválido.");
+            Console.WriteLine("\nPressione qualquer tecla para continuar...");
           }
           Console.ReadKey();
           break;
@@ -730,6 +742,7 @@ public class Gerenciador
           if (string.IsNullOrWhiteSpace(textoAdicionar))
           {
             Console.WriteLine("Anotação não pode ser vazia.");
+            Console.WriteLine("\nPressione qualquer tecla para continuar...");
             Console.ReadKey();
             break;
           }
@@ -737,10 +750,12 @@ public class Gerenciador
           {
             compromisso.AdicionarAnotacao(textoAdicionar);
             Console.WriteLine("Anotação adicionada.");
+            Console.WriteLine("\nPressione qualquer tecla para continuar...");
           }
           catch (ArgumentException ex)
           {
             Console.WriteLine($"Erro ao adicionar anotação: {ex.Message}");
+             Console.WriteLine("\nPressione qualquer tecla para continuar...");
           }
           Console.ReadKey();
           break;
@@ -748,6 +763,7 @@ public class Gerenciador
           if (compromisso.Anotacoes.Count == 0)
           {
             Console.WriteLine("Nenhuma anotação para remover.");
+            Console.WriteLine("\nPressione qualquer tecla para continuar...");
             Console.ReadKey();
             break;
           }
@@ -758,10 +774,12 @@ public class Gerenciador
             var anotacaoRemover = compromisso.Anotacoes[indiceRemover - 1];
             compromisso.RemoverAnotacao(anotacaoRemover);
             Console.WriteLine("Anotação removida.");
+            Console.WriteLine("\nPressione qualquer tecla para continuar...");
           }
           else
           {
             Console.WriteLine("Índice inválido.");
+            Console.WriteLine("\nPressione qualquer tecla para continuar...");
           }
           Console.ReadKey();
           break;
@@ -769,6 +787,7 @@ public class Gerenciador
           if (compromisso.Anotacoes.Count == 0)
           {
             Console.WriteLine("Nenhuma anotação para editar.");
+            Console.WriteLine("\nPressione qualquer tecla para continuar...");
             Console.ReadKey();
             break;
           }
@@ -783,20 +802,24 @@ public class Gerenciador
             {
               anotacaoEditar.Texto = novoTexto;
               Console.WriteLine("Anotação atualizada.");
+              Console.WriteLine("\nPressione qualquer tecla para continuar...");
             }
             else
             {
               Console.WriteLine("Anotação não pode ser vazia.");
+              Console.WriteLine("\nPressione qualquer tecla para continuar...");
             }
           }
           else
           {
             Console.WriteLine("Índice inválido.");
+            Console.WriteLine("\nPressione qualquer tecla para continuar...");
           }
           Console.ReadKey();
           break;
         default:
           Console.WriteLine("Opção inválida.");
+          Console.WriteLine("\nPressione qualquer tecla para continuar...");
           Console.ReadKey();
           break;
       }
